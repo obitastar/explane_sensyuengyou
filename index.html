@@ -810,13 +810,26 @@ strong{font-weight:700}
   function goTo(idx){
     if(idx < 0 || idx >= total || idx === current) return;
     const dir = idx > current ? 1 : -1;
-    slides[current].classList.remove('active');
-    slides[current].classList.add(dir > 0 ? 'prev' : '');
-    slides[current].style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+    const leaving = slides[current];
+    const entering = slides[idx];
+
+    // 1) 去るスライドをフェードアウト
+    leaving.classList.remove('active');
+    leaving.style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+
+    // 2) 来るスライドの初期位置をトランジションなしでセット
+    entering.style.transition = 'none';
+    entering.style.transform = dir > 0 ? 'translateX(40px)' : 'translateX(-40px)';
+    entering.style.opacity = '0';
+
+    // 3) 強制リフローの後、トランジションを戻してアクティブにする
+    void entering.offsetWidth;
+    entering.style.transition = '';
+    entering.style.transform = '';
+    entering.style.opacity = '';
+    entering.classList.add('active');
 
     current = idx;
-    slides[current].classList.remove('prev');
-    slides[current].classList.add('active');
 
     // Animate bars in new slide
     setTimeout(() => {
