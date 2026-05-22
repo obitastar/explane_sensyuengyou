@@ -58,13 +58,14 @@ strong{font-weight:700}
 }
 .slide{
   position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:flex-start;justify-content:center;
   opacity:0;pointer-events:none;
   transition:opacity 0.5s ease, transform 0.5s ease;
   transform:translateX(40px);
   background:var(--bg);
   overflow-y:auto;
-  padding:60px 0;
+  -webkit-overflow-scrolling:touch;
+  padding:40px 0 72px;
 }
 .slide.active{
   opacity:1;pointer-events:auto;transform:translateX(0);
@@ -76,7 +77,7 @@ strong{font-weight:700}
 .slide-inner{
   width:100%;max-width:960px;
   padding:0 56px;
-  margin:0 auto;
+  margin:auto;
 }
 
 /* ── Progress Bar ── */
@@ -442,31 +443,177 @@ strong{font-weight:700}
 }
 .footer-info{font-size:0.72rem;color:var(--text-muted);line-height:2.2;text-align:center;margin-top:8px}
 
-/* ── Responsive ── */
+/* ── Responsive: Tablet ── */
 @media(max-width:900px){
   .slide-inner{padding:0 28px}
   .yousui-card{grid-template-columns:1fr}
+  .yousui-vis{min-height:200px;padding:32px 24px}
   .stat-row{grid-template-columns:repeat(2,1fr)}
   .struct-grid{grid-template-columns:repeat(2,1fr)}
   .usage-grid{grid-template-columns:repeat(3,1fr)}
   .plat-table{font-size:0.72rem}
   .plat-table th,.plat-table td{padding:10px 8px}
+  .salesman-box{padding:28px 24px}
+  .salesman-box h3{font-size:1.1rem}
+  .salesman-box p{font-size:0.8rem}
+  .donut-row{gap:24px}
+  .donut{width:90px;height:90px}
+  .donut svg{width:90px;height:90px}
+  .donut-pct{font-size:1.2rem}
 }
+
+/* ── Responsive: Mobile ── */
 @media(max-width:640px){
-  .slide-inner{padding:0 18px}
-  .stat-row,.struct-grid{grid-template-columns:1fr 1fr}
-  .usage-grid{grid-template-columns:1fr 1fr}
-  .m-row{flex-direction:column;gap:4px;align-items:stretch}
-  .m-label{width:auto;text-align:left}
-  .fee-row{flex-direction:column;gap:4px;align-items:stretch}
-  .fee-lbl{width:auto;text-align:left}
-  .fee-note{width:auto}
-  .fee-save{flex-direction:column;text-align:center}
-  .fee-save-num{margin-left:0}
-  .tl::before{left:18px}
+  .slide{padding:24px 0 68px}
+  .slide-inner{padding:0 16px}
+
+  /* Cover */
+  .cover-badge{margin-bottom:20px;padding:5px 16px;font-size:0.55rem}
+  .cover-title{font-size:1.3rem;line-height:1.6;margin-bottom:8px}
+  .cover-sub{font-size:0.72rem;letter-spacing:0.15em;margin-bottom:28px}
+  .cover-line{height:28px;margin-bottom:18px}
+  .cover-client{font-size:0.78rem;line-height:2}
+  .cover-client strong{font-size:0.88rem}
+  .cover-date{margin-top:16px;font-size:0.75rem}
+
+  /* Section Headers */
+  .sec-num{font-size:0.6rem;margin-bottom:4px}
+  .sec-title{font-size:1.15rem;margin-bottom:4px}
+  .sec-title-en{font-size:0.62rem;margin-bottom:18px}
+  .sec-lead{font-size:0.8rem;line-height:1.8}
+
+  /* Issue Bars */
+  .issue-item{margin-bottom:16px}
+  .issue-label-text{font-size:0.78rem}
+  .issue-detail{font-size:0.7rem}
+
+  /* Solution Table → カード型に変換 */
+  .sol-table{font-size:0.76rem}
+  .sol-table thead{display:none}
+  .sol-table tbody tr{display:block;padding:14px 16px;margin-bottom:8px;border-radius:8px;border:1px solid var(--border-light)}
+  .sol-table tbody td{display:block;padding:2px 0;border-bottom:none;width:100%!important}
+  .sol-table .col-issue{font-size:0.82rem;margin-bottom:4px}
+  .sol-table .col-now{font-size:0.72rem}
+  .sol-table .col-now::before{content:'現状: ';font-weight:500;color:var(--text-sub)}
+  .sol-table .col-fix{font-size:0.72rem;margin-top:4px}
+  .sol-table .col-fix::before{content:'→ ';font-weight:700;color:var(--accent)}
+
+  /* Salesman */
+  .salesman-box{padding:24px 18px;border-radius:8px}
+  .salesman-big{font-size:2.5rem;right:14px;top:10px}
+  .salesman-box h3{font-size:1rem;line-height:1.6}
+  .salesman-box p{font-size:0.76rem;line-height:1.7}
+  .stat-row{grid-template-columns:1fr 1fr;gap:10px}
+  .stat-card{padding:16px 10px}
+  .stat-num{font-size:1.6rem}
+  .stat-lbl{font-size:0.62rem}
+  .donut-row{gap:16px;margin-top:18px}
+  .donut{width:80px;height:80px}
+  .donut svg{width:80px;height:80px}
+  .donut-pct{font-size:1.1rem}
+  .donut-lbl{font-size:0.66rem}
+  .donut-sub{font-size:0.56rem}
+
+  /* Yousui */
+  .yousui-card{border-radius:8px}
+  .yousui-vis{min-height:180px;padding:28px 16px}
+  .yousui-jp{font-size:1.4rem;letter-spacing:0.2em}
+  .yousui-en{font-size:0.58rem;margin-bottom:12px}
+  .yousui-catch{font-size:0.88rem}
+  .yousui-info{padding:20px 18px}
+  .yousui-info h3{font-size:0.88rem;margin-bottom:8px}
+  .yousui-info p{font-size:0.76rem;margin-bottom:12px}
+  .yousui-specs{font-size:0.74rem}
+  .yousui-specs .sl{width:60px;font-size:0.68rem}
+
+  /* Usage */
+  .usage-grid{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+  .usage-i{padding:14px 6px}
+  .usage-icon{width:32px;height:32px;font-size:0.9rem;margin-bottom:6px}
+  .usage-i h4{font-size:0.7rem}
+  .usage-i p{font-size:0.58rem}
+
+  /* Mineral */
+  .mineral-box{padding:20px 16px;border-radius:8px}
+  .mineral-box h3{font-size:0.85rem}
+  .m-row{flex-direction:column;gap:4px;align-items:stretch;margin-bottom:14px}
+  .m-label{width:auto;text-align:left;font-size:0.74rem}
+  .m-bar{height:14px;font-size:0.58rem}
+  .m-bar-tag{font-size:0.56rem;width:38px}
+
+  /* Platform Compare → 横スクロール対応 */
+  .plat-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
+  .plat-table{min-width:520px;font-size:0.68rem}
+  .plat-table th,.plat-table td{padding:9px 8px}
+  .plat-table thead th.hl::before{font-size:0.42rem;padding:1px 6px}
+
+  /* Fee Visual */
+  .fee-vis{padding:20px 16px;border-radius:8px;margin-top:16px}
+  .fee-vis h4{font-size:0.82rem;margin-bottom:16px}
+  .fee-row{flex-direction:column;gap:4px;align-items:stretch;margin-bottom:10px}
+  .fee-lbl{width:auto;text-align:left;font-size:0.74rem}
+  .fee-track{height:28px}
+  .fee-fill{font-size:0.65rem;padding-left:8px}
+  .fee-note{width:auto;font-size:0.95rem}
+  .fee-save{flex-direction:column;text-align:center;padding:14px 16px;gap:10px}
+  .fee-save-icon{font-size:1.3rem}
+  .fee-save-txt h4{font-size:0.78rem}
+  .fee-save-txt p{font-size:0.7rem}
+  .fee-save-num{margin-left:0;font-size:1.6rem}
+
+  /* Structure */
+  .struct-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .struct-card{padding:16px 10px;border-radius:6px}
+  .struct-card .sn{font-size:1.1rem;top:8px;right:10px}
+  .struct-icon{width:30px;height:30px;font-size:0.8rem;margin-bottom:6px}
+  .struct-card h3{font-size:0.72rem}
+  .struct-card p{font-size:0.58rem}
+
+  /* Timeline */
+  .tl::before{left:6px}
   .tl-phase{display:none}
-  .tl-dot{margin-left:12px}
+  .tl-item{gap:12px;padding:10px 0}
+  .tl-dot{width:8px;height:8px;margin-top:5px;margin-left:2px}
+  .tl-content{padding:12px 14px}
+  .tl-content h3{font-size:0.8rem}
+  .tl-content p{font-size:0.7rem}
+
+  /* Pricing */
+  .price-tbl{font-size:0.78rem}
+  .price-tbl th,.price-tbl td{padding:12px 14px}
+  .price-tbl .p-detail{font-size:0.66rem}
+  .price-tbl .p-val{font-size:0.92rem}
+  .price-total{padding:16px 18px}
+  .price-total-l{font-size:0.85rem}
+  .price-total-v{font-size:1.6rem}
+  .price-note{font-size:0.66rem}
+
+  /* Closing */
+  .closing-line{height:28px;margin-bottom:20px}
+  .closing-text{font-size:0.95rem;line-height:2}
+  .closing-sub{font-size:0.75rem}
+  .footer-co{margin-top:32px;font-size:0.65rem}
+  .footer-info{font-size:0.65rem}
+
+  /* Navigation */
+  .nav-bar{height:48px;padding:0 16px}
+  .nav-pages{font-size:0.75rem;min-width:60px}
+  .nav-pages .current{font-size:0.95rem}
   .nav-center{display:none}
+  .nav-btns{gap:6px}
+  .nav-btn{width:36px;height:36px;font-size:0.9rem}
+}
+
+/* ── Responsive: Small Mobile ── */
+@media(max-width:380px){
+  .slide-inner{padding:0 12px}
+  .cover-title{font-size:1.15rem}
+  .stat-row{gap:8px}
+  .stat-card{padding:12px 8px}
+  .stat-num{font-size:1.3rem}
+  .usage-grid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .struct-grid{gap:8px}
+  .yousui-jp{font-size:1.2rem}
 }
 
 /* ── Print ── */
@@ -658,6 +805,7 @@ strong{font-weight:700}
     <h2 class="sec-title">販売プラットフォーム手数料の比較</h2>
     <span class="sec-title-en">Platform Fee Comparison</span>
 
+    <div class="plat-table-wrap">
     <table class="plat-table">
       <thead>
         <tr><th style="text-align:left">比較項目</th><th>Amazon</th><th>さとふる<br><small>（ふるさと納税）</small></th><th class="hl">自社サイト</th></tr>
@@ -676,6 +824,7 @@ strong{font-weight:700}
         <tr><td><strong>実質手数料率</strong><br><small class="muted" style="font-weight:400">羊水塩 ¥400販売時</small></td><td style="color:var(--red);font-weight:700">約15〜22%</td><td>—<br><small class="muted" style="font-weight:400">直接比較不可</small></td><td class="hc">約3.6%</td></tr>
       </tfoot>
     </table>
+    </div>
   </div>
 </div>
 
