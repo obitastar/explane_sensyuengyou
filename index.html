@@ -675,9 +675,174 @@ strong{font-weight:700}
 
 /* ── Print ── */
 @media print{
-  body{overflow:auto;height:auto}
-  .slide{position:relative;opacity:1;transform:none;pointer-events:auto;page-break-after:always;min-height:100vh}
-  .progress,.nav-bar{display:none}
+  @page{
+    size:A4 portrait;
+    margin:18mm 16mm 18mm 16mm;
+  }
+
+  html{font-size:11pt}
+  body{
+    overflow:visible;height:auto;
+    background:#fff!important;color:#1a1a1a!important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  /* Hide navigation */
+  .progress,.nav-bar{display:none!important}
+
+  /* Reset slide engine */
+  .deck{position:static;width:auto;height:auto}
+  .slide{
+    position:relative!important;
+    opacity:1!important;
+    transform:none!important;
+    pointer-events:auto!important;
+    display:block!important;
+    overflow:visible!important;
+    padding:0!important;
+    page-break-after:always;
+    page-break-inside:avoid;
+    min-height:0;
+    background:#fff!important;
+  }
+  .slide:last-child{page-break-after:auto}
+  .slide-alt{background:#fff!important}
+  .slide-cover{background:#fff!important}
+
+  .slide-inner{
+    max-width:100%!important;
+    padding:0!important;
+    margin:0!important;
+  }
+
+  /* Cover page */
+  .slide[data-idx="0"]{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-height:calc(297mm - 36mm);
+  }
+  .cover-badge{border-color:#ccc}
+  .cover-title{font-size:2rem}
+  .cover-sub{color:#888}
+  .cover-line{background:#ccc}
+
+  /* Section headers */
+  .sec-num{color:var(--gold)}
+  .sec-title{font-size:1.4rem}
+  .sec-title-en{font-size:0.65rem;color:#999;margin-bottom:16px}
+  .sec-lead{font-size:0.82rem;margin-bottom:16px}
+
+  /* Issue bars: ensure colors print */
+  .issue-bar-outer{background:#eee!important}
+  .issue-bar-inner{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .issue-bar-inner.red{background:#d94040!important}
+  .issue-bar-inner.orange{background:#d97840!important}
+  .issue-bar-inner.yellow{background:#c8a030!important}
+  .issue-item{margin-bottom:14px}
+  .issue-detail{font-size:0.7rem}
+
+  /* Tables */
+  .sol-table{box-shadow:none;border:1px solid #ddd;font-size:0.75rem}
+  .sol-table th,.sol-table td{padding:10px 12px}
+  .sol-table thead th{background:var(--accent)!important;color:#fff!important}
+  .sol-table .col-issue{color:#c04a32}
+  .sol-table .col-fix{color:#1a3a52}
+
+  /* Salesman box */
+  .salesman-box{
+    background:var(--accent)!important;color:#fff!important;
+    padding:28px 32px;border-radius:8px;margin-bottom:20px;
+  }
+  .salesman-box h3{font-size:1.1rem}
+  .salesman-box p{font-size:0.78rem}
+  .salesman-big{color:rgba(255,255,255,0.08)!important}
+
+  /* Stat cards */
+  .stat-row{gap:10px}
+  .stat-card{
+    box-shadow:none;border:1px solid #e0e0e0;
+    padding:14px 10px;
+  }
+  .stat-num{font-size:1.5rem;color:var(--accent)!important}
+
+  /* Donut charts */
+  .donut-row{gap:24px;margin-top:16px}
+  .donut{width:80px;height:80px}
+  .donut svg{width:80px;height:80px}
+  .donut-pct{font-size:1.1rem}
+  .donut-lbl{font-size:0.68rem}
+  .donut-sub{font-size:0.56rem}
+
+  /* Yousui card */
+  .yousui-card{box-shadow:none;border:1px solid #ddd}
+  .yousui-vis{
+    background:linear-gradient(135deg,#0f1a24,#1a3a52 50%,#0f2030)!important;
+    color:#f4ede4!important;min-height:200px;
+  }
+  .yousui-info{padding:24px}
+
+  /* Usage grid */
+  .usage-grid{gap:8px}
+  .usage-i{box-shadow:none;border:1px solid #e8e8e8;padding:14px 8px}
+
+  /* Mineral chart */
+  .mineral-box{box-shadow:none;border:1px solid #ddd;padding:24px}
+  .m-bar.y{background:var(--accent)!important;color:#fff!important}
+  .m-bar.o{background:#d0ccc5!important}
+
+  /* Platform table */
+  .plat-table-wrap{overflow:visible!important;margin:0!important;padding:0!important}
+  .plat-table{box-shadow:none;border:1px solid #ddd;min-width:0!important;font-size:0.72rem}
+  .plat-table th,.plat-table td{padding:8px 10px}
+  .plat-table thead th{background:#f0ede8!important;color:#1a1a1a!important}
+  .plat-table thead th.hl{background:var(--accent)!important;color:#fff!important}
+  .plat-table thead th.hl::before{background:var(--gold)!important}
+  .plat-table td.hc{background:rgba(26,58,82,0.05)!important}
+  .plat-table tfoot td{background:#f0ede8!important}
+  .plat-table tfoot .hc{background:rgba(26,58,82,0.08)!important}
+  .t-green{color:#2d8a5e!important}
+  .t-red{color:#d94040!important}
+
+  /* Fee visual */
+  .fee-vis{box-shadow:none;border:1px solid #ddd;padding:24px}
+  .fee-fill.amazon{background:#e88500!important;color:#fff!important}
+  .fee-fill.self{background:var(--accent)!important;color:#fff!important}
+  .fee-track{background:#eee!important}
+  .fee-save{background:#e8f5ef!important}
+
+  /* Structure grid */
+  .struct-grid{gap:10px}
+  .struct-card{box-shadow:none;border:1px solid #e0e0e0;padding:14px 10px}
+
+  /* Demo link box */
+  .demo-link-box{box-shadow:none;border:1px solid #ddd;padding:20px 24px}
+  .demo-link-url{border-color:#1a3a52;color:#1a3a52}
+
+  /* Timeline */
+  .tl::before{background:#ddd}
+  .tl-dot{border-color:var(--accent)!important}
+  .tl-content{box-shadow:none;border:1px solid #e0e0e0;padding:12px 16px}
+
+  /* Pricing */
+  .price-tbl{box-shadow:none;border:1px solid #ddd}
+  .price-tbl thead th{background:var(--accent)!important;color:#fff!important}
+  .price-total{background:var(--accent)!important;color:#fff!important}
+
+  /* Closing */
+  .closing-text{font-size:1rem}
+
+  /* Animations: show final state */
+  .issue-bar-inner{transition:none!important}
+  .m-bar{transition:none!important}
+  .fee-fill{transition:none!important}
+  [data-width]{width:attr(data-width)!important}
+
+  /* Links: show URL */
+  .demo-link-url::after{
+    content:none;
+  }
 }
 </style>
 </head>
@@ -1102,6 +1267,18 @@ strong{font-weight:700}
   setTimeout(() => {
     slides[0].querySelectorAll('[data-width]').forEach(el => el.style.width = el.dataset.width);
   }, 300);
+
+  // Print: expand all bars and donut arcs before printing
+  window.addEventListener('beforeprint', () => {
+    document.querySelectorAll('[data-width]').forEach(el => {
+      el.style.transition = 'none';
+      el.style.width = el.dataset.width;
+    });
+    document.querySelectorAll('.donut-arc').forEach(arc => {
+      arc.style.transition = 'none';
+      arc.style.strokeDashoffset = arc.dataset.target;
+    });
+  });
 
   // QR Code generation using qrcode-generator (MIT, Kazuhiko Arase)
   // CDN loaded below, fallback to placeholder
