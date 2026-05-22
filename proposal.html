@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご提案書 — 泉州塩業株式会社 様</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+:root {
+  --white: #ffffff;
+  --bg: #f8f7f4;
+  --bg-warm: #f3f0ea;
+  --text: #1a1a1a;
+  --text-sub: #555;
+  --text-muted: #999;
+  --accent: #1a3a52;
+  --accent-light: #2a5a7a;
+  --gold: #b8935a;
+  --vermilion: #c04a32;
+  --green: #2d8a5e;
+  --green-light: #e8f5ef;
+  --red: #d94040;
+  --blue: #3478c8;
+  --blue-light: #e8f0fc;
+  --border: #e4e0d8;
+  --border-light: #edeae4;
+  --shadow: 0 2px 24px rgba(0,0,0,0.05);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.07);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{
+  font-family:'Noto Sans JP',-apple-system,sans-serif;
+  font-weight:400;color:var(--text);
+  line-height:1.8;letter-spacing:0.02em;
+  overflow:hidden;height:100vh;
+  -webkit-font-smoothing:antialiased;
+  background:var(--bg);
+}
+.serif{font-family:'Noto Serif JP',serif}
+.garamond{font-family:'Cormorant Garamond',serif}
+.cinzel{font-family:'Cinzel',serif}
+.gold{color:var(--gold)}
+.accent{color:var(--accent)}
+.muted{color:var(--text-muted)}
+strong{font-weight:700}
+
+/* ============================================
+   SLIDE ENGINE
+   ============================================ */
+.deck{
+  position:relative;width:100vw;height:100vh;
+}
+.slide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.5s ease, transform 0.5s ease;
+  transform:translateX(40px);
+  background:var(--bg);
+  overflow-y:auto;
+  padding:60px 0;
+}
+.slide.active{
+  opacity:1;pointer-events:auto;transform:translateX(0);
+  z-index:2;
+}
+.slide.prev{
+  opacity:0;transform:translateX(-40px);
+}
+.slide-inner{
+  width:100%;max-width:960px;
+  padding:0 56px;
+  margin:0 auto;
+}
+
+/* ── Progress Bar ── */
+.progress{
+  position:fixed;top:0;left:0;right:0;height:3px;
+  background:var(--border);z-index:100;
+}
+.progress-fill{
+  height:100%;background:var(--accent);
+  transition:width 0.4s ease;
+}
+
+/* ── Navigation ── */
+.nav-bar{
+  position:fixed;bottom:0;left:0;right:0;
+  height:56px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 32px;
+  background:rgba(248,247,244,0.92);
+  backdrop-filter:blur(10px);
+  border-top:1px solid var(--border);z-index:100;
+}
+.nav-pages{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.85rem;color:var(--text-muted);
+  letter-spacing:0.1em;min-width:80px;
+}
+.nav-pages .current{color:var(--accent);font-weight:600;font-size:1.1rem}
+.nav-center{
+  display:flex;gap:6px;
+}
+.nav-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);cursor:pointer;
+  transition:background 0.3s, transform 0.3s;
+}
+.nav-dot.active{background:var(--accent);transform:scale(1.3)}
+.nav-dot:hover{background:var(--gold)}
+.nav-btns{display:flex;gap:8px}
+.nav-btn{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--border);background:var(--white);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--text-sub);
+  transition:all 0.2s;
+}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.nav-btn:disabled{opacity:0.3;cursor:default}
+
+/* ── Slide-specific backgrounds ── */
+.slide-cover{background:var(--white)}
+.slide-alt{background:var(--white)}
+
+/* ============================================
+   TYPOGRAPHY & COMPONENTS
+   ============================================ */
+.sec-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.68rem;font-weight:500;
+  letter-spacing:0.3em;color:var(--gold);
+  display:block;margin-bottom:6px;text-transform:uppercase;
+}
+.sec-title{
+  font-family:'Noto Serif JP',serif;
+  font-weight:700;font-size:clamp(1.3rem,2.8vw,1.8rem);
+  letter-spacing:0.05em;line-height:1.5;margin-bottom:6px;
+}
+.sec-title-en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.72rem;letter-spacing:0.2em;
+  color:var(--text-muted);display:block;margin-bottom:28px;
+}
+.sec-lead{
+  font-size:0.88rem;color:var(--text-sub);
+  line-height:2;max-width:680px;
+}
+
+/* ── Cover ── */
+.cover-badge{
+  display:inline-block;font-family:'Cinzel',serif;
+  font-size:0.6rem;letter-spacing:0.4em;color:var(--gold);
+  border:1px solid var(--border);padding:6px 24px;
+  margin-bottom:36px;text-transform:uppercase;
+}
+.cover-title{
+  font-family:'Noto Serif JP',serif;font-weight:900;
+  font-size:clamp(1.5rem,3.8vw,2.6rem);
+  line-height:1.7;letter-spacing:0.08em;margin-bottom:12px;
+}
+.cover-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(0.8rem,1.4vw,0.95rem);
+  letter-spacing:0.25em;color:var(--text-muted);margin-bottom:48px;
+}
+.cover-line{
+  width:1px;height:40px;margin:0 auto 28px;
+  background:linear-gradient(to bottom,var(--border),transparent);
+}
+.cover-client{font-size:0.85rem;color:var(--text-sub);line-height:2.3}
+.cover-client strong{color:var(--text);font-size:0.95rem}
+.cover-date{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.82rem;letter-spacing:0.2em;
+  color:var(--gold);margin-top:24px;
+}
+
+/* ── Issue Bars ── */
+.issue-item{margin-bottom:22px}
+.issue-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.issue-label-text{font-weight:500;font-size:0.85rem}
+.issue-label-score{font-size:0.75rem}
+.issue-bar-outer{width:100%;height:7px;background:var(--border-light);border-radius:4px;overflow:hidden}
+.issue-bar-inner{height:100%;border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.25,.46,.45,.94)}
+.issue-bar-inner.red{background:linear-gradient(90deg,#e8563d,#d94040)}
+.issue-bar-inner.orange{background:linear-gradient(90deg,#e8943d,#d97840)}
+.issue-bar-inner.yellow{background:linear-gradient(90deg,#d4b050,#c8a030)}
+.issue-detail{font-size:0.76rem;color:var(--text-muted);margin-top:4px;line-height:1.6}
+
+/* ── Solution Table ── */
+.sol-table{
+  width:100%;border-collapse:separate;border-spacing:0;
+  font-size:0.82rem;background:var(--white);
+  border-radius:8px;overflow:hidden;box-shadow:var(--shadow);
+}
+.sol-table th,.sol-table td{padding:14px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border-light)}
+.sol-table thead th{background:var(--accent);color:var(--white);font-weight:500;font-size:0.74rem;letter-spacing:0.06em}
+.sol-table tbody tr:last-child td{border-bottom:none}
+.sol-table .col-issue{width:22%;color:var(--vermilion);font-weight:600}
+.sol-table .col-now{width:30%;color:var(--text-muted)}
+.sol-table .col-fix{width:48%;color:var(--accent);font-weight:500}
+.badge-s{
+  display:inline-block;font-size:0.58rem;padding:1px 8px;
+  border-radius:8px;background:var(--green-light);color:var(--green);
+  font-weight:500;margin-left:4px;vertical-align:middle;
+}
+
+/* ── Salesman ── */
+.salesman-box{
+  background:var(--accent);color:var(--white);
+  border-radius:10px;padding:40px 44px;
+  position:relative;overflow:hidden;box-shadow:var(--shadow-lg);
+  margin-bottom:28px;
+}
+.salesman-box::before{
+  content:'';position:absolute;top:-40%;right:-15%;
+  width:360px;height:360px;border-radius:50%;
+  background:rgba(255,255,255,0.03);
+}
+.salesman-big{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,8vw,5.5rem);font-weight:300;
+  line-height:1;color:rgba(255,255,255,0.1);
+  position:absolute;right:36px;top:16px;
+}
+.salesman-box h3{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:700;
+  line-height:1.7;margin-bottom:12px;position:relative;
+}
+.salesman-box p{font-size:0.84rem;opacity:0.85;line-height:1.85;max-width:560px;position:relative}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat-card{
+  background:var(--white);border-radius:8px;
+  padding:22px 16px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:600;color:var(--accent);line-height:1.2;
+}
+.stat-unit{font-size:0.78rem;color:var(--accent)}
+.stat-lbl{font-size:0.7rem;color:var(--text-muted);margin-top:4px}
+
+/* ── Donut ── */
+.donut-row{display:flex;justify-content:center;gap:40px;margin-top:28px;flex-wrap:wrap}
+.donut-item{text-align:center}
+.donut{width:110px;height:110px;border-radius:50%;position:relative;margin:0 auto 10px}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.donut-pct{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;line-height:1}
+.donut-pct-u{font-size:0.65rem;color:var(--text-muted)}
+.donut-lbl{font-size:0.74rem;font-weight:500}
+.donut-sub{font-size:0.62rem;color:var(--text-muted)}
+
+/* ── Yousui ── */
+.yousui-card{
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--white);border-radius:10px;
+  overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:28px;
+}
+.yousui-vis{
+  background:linear-gradient(135deg,#0f1a24,#1a3a52 50%,#0f2030);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:44px 32px;text-align:center;color:#f4ede4;min-height:280px;
+}
+.yousui-jp{font-family:'Noto Serif JP',serif;font-weight:900;font-size:1.9rem;letter-spacing:0.3em;margin-bottom:6px}
+.yousui-en{font-family:'Cormorant Garamond',serif;font-size:0.68rem;letter-spacing:0.25em;color:rgba(244,237,228,0.5);margin-bottom:18px}
+.yousui-catch{font-family:'Noto Serif JP',serif;font-weight:700;font-size:1rem;letter-spacing:0.1em}
+.yousui-info{padding:36px 32px;display:flex;flex-direction:column;justify-content:center}
+.yousui-info h3{font-family:'Noto Serif JP',serif;font-weight:700;font-size:1rem;margin-bottom:10px;color:var(--accent)}
+.yousui-info p{font-size:0.82rem;color:var(--text-sub);line-height:1.9;margin-bottom:18px}
+.yousui-specs{list-style:none;font-size:0.8rem}
+.yousui-specs li{display:flex;padding:8px 0;border-bottom:1px solid var(--border-light)}
+.yousui-specs li:last-child{border-bottom:none}
+.yousui-specs .sl{width:80px;flex-shrink:0;color:var(--text-muted);font-size:0.74rem}
+.yousui-specs .sv{color:var(--text);font-weight:500}
+
+/* ── Mineral Chart ── */
+.mineral-box{
+  background:var(--white);border-radius:10px;
+  padding:32px;box-shadow:var(--shadow);
+}
+.mineral-box h3{font-family:'Noto Serif JP',serif;font-weight:700;font-size:0.95rem;margin-bottom:4px}
+.mineral-box .msub{font-size:0.74rem;color:var(--text-muted);margin-bottom:24px}
+.m-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.m-label{width:90px;flex-shrink:0;font-size:0.78rem;font-weight:500;text-align:right}
+.m-bars{flex:1;display:flex;flex-direction:column;gap:3px}
+.m-bar-w{display:flex;align-items:center;gap:6px}
+.m-bar-tag{font-size:0.6rem;width:44px;flex-shrink:0;color:var(--text-muted)}
+.m-bar{
+  height:16px;border-radius:3px;
+  transition:width 1.2s cubic-bezier(.25,.46,.45,.94);
+  width:0;display:flex;align-items:center;justify-content:flex-end;
+  padding-right:6px;font-family:'Cormorant Garamond',serif;
+  font-size:0.65rem;font-weight:600;color:var(--white);min-width:0;
+}
+.m-bar.y{background:linear-gradient(90deg,var(--accent),var(--accent-light))}
+.m-bar.o{background:#d0ccc5;color:var(--text-muted)}
+
+/* ── Usage ── */
+.usage-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.usage-i{
+  text-align:center;padding:20px 10px;
+  background:var(--white);border-radius:8px;box-shadow:var(--shadow);
+}
+.usage-icon{
+  width:40px;height:40px;margin:0 auto 8px;border-radius:50%;
+  background:var(--bg-warm);display:flex;align-items:center;
+  justify-content:center;font-size:1.1rem;
+}
+.usage-i h4{font-size:0.8rem;font-weight:700;margin-bottom:2px}
+.usage-i p{font-size:0.65rem;color:var(--text-muted);line-height:1.5}
+
+/* ── Platform Compare ── */
+.plat-table{
+  width:100%;border-collapse:separate;border-spacing:0;
+  font-size:0.8rem;background:var(--white);
+  border-radius:10px;overflow:hidden;box-shadow:var(--shadow-lg);
+}
+.plat-table th,.plat-table td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--border-light);vertical-align:middle}
+.plat-table thead th{background:var(--bg-warm);font-weight:700;font-size:0.76rem;color:var(--text);padding:16px}
+.plat-table thead th:first-child{text-align:left}
+.plat-table thead th.hl{
+  background:var(--accent);color:var(--white);position:relative;
+}
+.plat-table thead th.hl::before{
+  content:'RECOMMEND';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.18em;
+  background:var(--gold);color:var(--white);padding:2px 10px;border-radius:0 0 5px 5px;
+}
+.plat-table tbody td:first-child{text-align:left;font-weight:500;font-size:0.76rem}
+.plat-table tbody tr:last-child td{border-bottom:none}
+.plat-table td.hc{background:rgba(26,58,82,0.03);font-weight:600;color:var(--accent)}
+.plat-table tfoot td{border-top:2px solid var(--accent);border-bottom:none;font-weight:700;font-size:0.88rem;padding:16px;background:var(--bg-warm)}
+.plat-table tfoot .hc{background:rgba(26,58,82,0.06);color:var(--accent)}
+.plat-table small{font-weight:400;opacity:0.6}
+.t-green{color:var(--green)}
+.t-red{color:var(--red)}
+
+/* ── Fee Visual ── */
+.fee-vis{background:var(--white);border-radius:10px;padding:32px;box-shadow:var(--shadow);margin-top:24px}
+.fee-vis h4{font-family:'Noto Serif JP',serif;font-weight:700;font-size:0.9rem;margin-bottom:22px}
+.fee-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fee-lbl{width:100px;flex-shrink:0;font-size:0.78rem;font-weight:500;text-align:right}
+.fee-track{flex:1;height:32px;background:var(--border-light);border-radius:5px;position:relative;overflow:hidden}
+.fee-fill{
+  height:100%;border-radius:5px;display:flex;align-items:center;
+  padding-left:10px;font-size:0.72rem;font-weight:700;color:var(--white);
+  transition:width 1.2s cubic-bezier(.25,.46,.45,.94);width:0;
+}
+.fee-fill.amazon{background:linear-gradient(90deg,#ff9900,#e88500)}
+.fee-fill.self{background:linear-gradient(90deg,var(--accent),var(--accent-light))}
+.fee-note{
+  width:72px;flex-shrink:0;font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:600;text-align:left;
+}
+.fee-save{
+  display:flex;align-items:center;gap:16px;
+  background:var(--green-light);border-radius:8px;
+  padding:18px 24px;margin-top:20px;
+}
+.fee-save-icon{font-size:1.6rem;flex-shrink:0}
+.fee-save-txt h4{font-weight:700;font-size:0.85rem;color:var(--green);margin-bottom:2px}
+.fee-save-txt p{font-size:0.76rem;color:var(--text-sub);line-height:1.6}
+.fee-save-num{
+  font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;
+  color:var(--green);flex-shrink:0;margin-left:auto;
+}
+
+/* ── Structure Cards ── */
+.struct-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.struct-card{
+  background:var(--white);border:1px solid var(--border-light);
+  border-radius:8px;padding:22px 16px;text-align:center;
+  box-shadow:var(--shadow);position:relative;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.struct-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.struct-card .sn{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  font-weight:300;color:var(--border);position:absolute;top:12px;right:14px;
+}
+.struct-icon{
+  width:36px;height:36px;border-radius:50%;
+  margin:0 auto 10px;display:flex;align-items:center;
+  justify-content:center;font-size:0.95rem;
+}
+.struct-card h3{font-size:0.82rem;font-weight:700;margin-bottom:3px}
+.struct-card p{font-size:0.66rem;color:var(--text-muted);line-height:1.5}
+
+/* ── Timeline ── */
+.tl{position:relative;margin-top:28px}
+.tl::before{content:'';position:absolute;left:108px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{display:flex;gap:20px;padding:16px 0;align-items:flex-start}
+.tl-phase{width:90px;flex-shrink:0;text-align:right;padding-top:2px}
+.tl-phase-l{font-family:'Cormorant Garamond',serif;font-size:0.65rem;letter-spacing:0.18em;color:var(--gold);display:block}
+.tl-phase-w{font-size:0.68rem;color:var(--text-muted)}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:var(--white);border:2px solid var(--accent);flex-shrink:0;margin-top:4px;position:relative;z-index:1}
+.tl-content{flex:1;background:var(--white);border-radius:7px;padding:16px 20px;box-shadow:var(--shadow)}
+.tl-content h3{font-weight:700;font-size:0.85rem;margin-bottom:3px}
+.tl-content p{font-size:0.74rem;color:var(--text-muted);line-height:1.6}
+
+/* ── Pricing ── */
+.price-tbl{
+  width:100%;border-collapse:separate;border-spacing:0;
+  font-size:0.84rem;background:var(--white);
+  border-radius:10px;overflow:hidden;box-shadow:var(--shadow-lg);
+}
+.price-tbl th,.price-tbl td{padding:15px 20px;border-bottom:1px solid var(--border-light);text-align:left}
+.price-tbl thead th{background:var(--accent);color:var(--white);font-weight:500;font-size:0.74rem;letter-spacing:0.05em}
+.price-tbl thead th:last-child{text-align:right}
+.price-tbl tbody tr:last-child td{border-bottom:none}
+.price-tbl .p-detail{font-size:0.72rem;color:var(--text-muted);margin-top:2px}
+.price-tbl .p-val{text-align:right;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600}
+
+.price-total{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:22px 28px;margin-top:14px;
+  background:var(--accent);border-radius:8px;color:var(--white);
+}
+.price-total-l{font-family:'Noto Serif JP',serif;font-weight:700;font-size:0.95rem;letter-spacing:0.05em}
+.price-total-v{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700}
+.price-note{margin-top:16px;font-size:0.72rem;color:var(--text-muted);line-height:1.9}
+
+/* ── Closing ── */
+.closing-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--border));margin:0 auto 32px}
+.closing-text{
+  font-family:'Noto Serif JP',serif;font-size:1.1rem;font-weight:700;
+  line-height:2.2;letter-spacing:0.06em;text-align:center;margin-bottom:12px;
+}
+.closing-sub{font-size:0.82rem;color:var(--text-muted);text-align:center}
+.footer-co{
+  font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.3em;
+  color:var(--gold);margin-top:48px;text-align:center;
+}
+.footer-info{font-size:0.72rem;color:var(--text-muted);line-height:2.2;text-align:center;margin-top:8px}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .slide-inner{padding:0 28px}
+  .yousui-card{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .struct-grid{grid-template-columns:repeat(2,1fr)}
+  .usage-grid{grid-template-columns:repeat(3,1fr)}
+  .plat-table{font-size:0.72rem}
+  .plat-table th,.plat-table td{padding:10px 8px}
+}
+@media(max-width:640px){
+  .slide-inner{padding:0 18px}
+  .stat-row,.struct-grid{grid-template-columns:1fr 1fr}
+  .usage-grid{grid-template-columns:1fr 1fr}
+  .m-row{flex-direction:column;gap:4px;align-items:stretch}
+  .m-label{width:auto;text-align:left}
+  .fee-row{flex-direction:column;gap:4px;align-items:stretch}
+  .fee-lbl{width:auto;text-align:left}
+  .fee-note{width:auto}
+  .fee-save{flex-direction:column;text-align:center}
+  .fee-save-num{margin-left:0}
+  .tl::before{left:18px}
+  .tl-phase{display:none}
+  .tl-dot{margin-left:12px}
+  .nav-center{display:none}
+}
+
+/* ── Print ── */
+@media print{
+  body{overflow:auto;height:auto}
+  .slide{position:relative;opacity:1;transform:none;pointer-events:auto;page-break-after:always;min-height:100vh}
+  .progress,.nav-bar{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress -->
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- ═══════════ SLIDE DECK ═══════════ -->
+<div class="deck" id="deck">
+
+<!-- ─── 0: COVER ─── -->
+<div class="slide slide-cover active" data-idx="0">
+  <div class="slide-inner" style="text-align:center">
+    <div class="cover-badge">Proposal</div>
+    <h1 class="cover-title">ブランディングLP制作の<br>ご提案</h1>
+    <p class="cover-sub">Branding Landing Page — Production Proposal</p>
+    <div class="cover-line"></div>
+    <div class="cover-client">
+      <strong>泉州塩業株式会社</strong>　様<br>
+      屋号：鯨屋（KUJIRAYA）<br>
+      <span class="muted" style="font-size:0.78rem">天文年間（1532年）創業 — 泉州唯一の塩造り</span>
+    </div>
+    <p class="cover-date">2026.05.22</p>
+  </div>
+</div>
+
+<!-- ─── 1: 現状の課題 ─── -->
+<div class="slide slide-alt" data-idx="1">
+  <div class="slide-inner">
+    <span class="sec-num">Section 01</span>
+    <h2 class="sec-title">現サイトの課題分析</h2>
+    <span class="sec-title-en">Current Website Issues</span>
+    <p class="sec-lead" style="margin-bottom:28px">
+      450年の歴史と「天下一」の称号 —— 貴社には圧倒的な強みがあります。<br>
+      しかし、現在のWebサイトではその価値が十分に伝わっていません。
+    </p>
+    <div style="max-width:660px">
+      <div class="issue-item">
+        <div class="issue-label"><span class="issue-label-text">ブランド訴求力</span><span class="issue-label-score" style="color:var(--vermilion)">深刻</span></div>
+        <div class="issue-bar-outer"><div class="issue-bar-inner red" data-width="85%"></div></div>
+        <p class="issue-detail">450年の歴史・「天下一」の称号が埋もれ、一般的な食品サイトと区別がつかない</p>
+      </div>
+      <div class="issue-item">
+        <div class="issue-label"><span class="issue-label-text">情報設計・導線</span><span class="issue-label-score" style="color:var(--vermilion)">深刻</span></div>
+        <div class="issue-bar-outer"><div class="issue-bar-inner red" data-width="78%"></div></div>
+        <p class="issue-detail">ページが分散し、訪問者が「何を売っている会社か」を理解するまでに離脱する</p>
+      </div>
+      <div class="issue-item">
+        <div class="issue-label"><span class="issue-label-text">デザインの品格</span><span class="issue-label-score" style="color:#d97840">要改善</span></div>
+        <div class="issue-bar-outer"><div class="issue-bar-inner orange" data-width="72%"></div></div>
+        <p class="issue-detail">WordPressテンプレートのデザインが、老舗の格式・重厚感と乖離している</p>
+      </div>
+      <div class="issue-item">
+        <div class="issue-label"><span class="issue-label-text">商品の魅力訴求</span><span class="issue-label-score" style="color:#d97840">要改善</span></div>
+        <div class="issue-bar-outer"><div class="issue-bar-inner orange" data-width="70%"></div></div>
+        <p class="issue-detail">羊水塩のミネラル組成・独自性がスペック羅列に留まり、価値として伝わらない</p>
+      </div>
+      <div class="issue-item">
+        <div class="issue-label"><span class="issue-label-text">購入・問合せ導線</span><span class="issue-label-score" style="color:#c8a030">改善余地</span></div>
+        <div class="issue-bar-outer"><div class="issue-bar-inner yellow" data-width="60%"></div></div>
+        <p class="issue-detail">興味を持った訪問者が、どこから購入できるのか分かりにくい</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 2: 課題と対策 ─── -->
+<div class="slide" data-idx="2">
+  <div class="slide-inner">
+    <span class="sec-num">Section 02</span>
+    <h2 class="sec-title">課題と対策</h2>
+    <span class="sec-title-en">Issues &amp; Solutions</span>
+    <table class="sol-table">
+      <thead><tr><th>課題</th><th>現状</th><th>対策</th></tr></thead>
+      <tbody>
+        <tr><td class="col-issue">歴史が伝わらない</td><td class="col-now">テキスト中心で歴史情報が分散</td><td class="col-fix">全画面ヒーローに「天下一」を大判縦組みで配置 <span class="badge-s">対策済</span></td></tr>
+        <tr><td class="col-issue">ブランドイメージの乖離</td><td class="col-now">明るく軽いテンプレートデザイン</td><td class="col-fix">和モダン×ダークラグジュアリーの重厚デザイン <span class="badge-s">対策済</span></td></tr>
+        <tr><td class="col-issue">情報が散在</td><td class="col-now">複数ページに分散</td><td class="col-fix">1ページ完結のLP。歴史→哲学→商品→購入の一気通貫導線 <span class="badge-s">対策済</span></td></tr>
+        <tr><td class="col-issue">羊水塩の差別化不足</td><td class="col-now">スペック表のみ</td><td class="col-fix">ミネラル比較グラフで視覚化。「他社の10倍以上」を一目で <span class="badge-s">対策済</span></td></tr>
+        <tr><td class="col-issue">購入導線の弱さ</td><td class="col-now">購入方法が分かりにくい</td><td class="col-fix">さとふる・自社販売への導線を明確配置 <span class="badge-s">対策済</span></td></tr>
+        <tr><td class="col-issue">スマートフォン対応</td><td class="col-now">テンプレート依存</td><td class="col-fix">スマホファースト設計。縦組みは画面幅で自動切替 <span class="badge-s">対策済</span></td></tr>
+        <tr><td class="col-issue">表示速度</td><td class="col-now">WordPress+プラグインで重い</td><td class="col-fix">Next.js 15で高速表示。画像最適化・遅延読込 <span class="badge-s">対策済</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 3: 年中無休の営業マン ─── -->
+<div class="slide slide-alt" data-idx="3">
+  <div class="slide-inner">
+    <span class="sec-num">Section 03</span>
+    <h2 class="sec-title">ホームページは、年中無休の営業マン</h2>
+    <span class="sec-title-en">Your 24/7 Salesperson</span>
+
+    <div class="salesman-box">
+      <span class="salesman-big">24/7</span>
+      <h3>365日、24時間。<br>眠らず、休まず、<br>貴社の魅力を伝え続ける。</h3>
+      <p>優秀な営業マンを一人雇うには年間数百万円のコストがかかります。<br>しかしホームページは、一度作れば年中無休で貴社の歴史・商品・想いを伝え続けます。しかも全国、さらには世界中のお客様に。</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-num">365<span class="stat-unit">日</span></div><div class="stat-lbl">年中無休で稼働</div></div>
+      <div class="stat-card"><div class="stat-num">24<span class="stat-unit">時間</span></div><div class="stat-lbl">深夜・早朝も対応</div></div>
+      <div class="stat-card"><div class="stat-num">47<span class="stat-unit">都道府県</span></div><div class="stat-lbl">全国どこからでも</div></div>
+      <div class="stat-card"><div class="stat-num">0<span class="stat-unit">円</span></div><div class="stat-lbl">追加人件費</div></div>
+    </div>
+
+    <div class="donut-row">
+      <div class="donut-item">
+        <div class="donut"><svg viewBox="0 0 120 120" width="110" height="110"><circle cx="60" cy="60" r="48" fill="none" stroke="#e4e0d8" stroke-width="9"/><circle cx="60" cy="60" r="48" fill="none" stroke="#1a3a52" stroke-width="9" stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 60 60)" stroke-linecap="round" class="donut-arc" data-target="30.16"/></svg><div class="donut-center"><span class="donut-pct">90<span class="donut-pct-u">%</span></span></div></div>
+        <div class="donut-lbl">第一印象はWebで決まる</div><div class="donut-sub">取引先・メディアも必ず見る</div>
+      </div>
+      <div class="donut-item">
+        <div class="donut"><svg viewBox="0 0 120 120" width="110" height="110"><circle cx="60" cy="60" r="48" fill="none" stroke="#e4e0d8" stroke-width="9"/><circle cx="60" cy="60" r="48" fill="none" stroke="#c04a32" stroke-width="9" stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 60 60)" stroke-linecap="round" class="donut-arc" data-target="75.4"/></svg><div class="donut-center"><span class="donut-pct">75<span class="donut-pct-u">%</span></span></div></div>
+        <div class="donut-lbl">サイトで信頼性を判断</div><div class="donut-sub">古いデザインは離脱の原因</div>
+      </div>
+      <div class="donut-item">
+        <div class="donut"><svg viewBox="0 0 120 120" width="110" height="110"><circle cx="60" cy="60" r="48" fill="none" stroke="#e4e0d8" stroke-width="9"/><circle cx="60" cy="60" r="48" fill="none" stroke="#b8935a" stroke-width="9" stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 60 60)" stroke-linecap="round" class="donut-arc" data-target="98.02"/></svg><div class="donut-center"><span class="donut-pct">3.2<span class="donut-pct-u">倍</span></span></div></div>
+        <div class="donut-lbl">ブランドサイトの効果</div><div class="donut-sub">テンプレ比の問合せ率</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 4: 羊水塩の魅力 ─── -->
+<div class="slide" data-idx="4">
+  <div class="slide-inner">
+    <span class="sec-num">Section 04</span>
+    <h2 class="sec-title">羊水塩の魅力を、最大限に引き出す</h2>
+    <span class="sec-title-en">Maximizing the Appeal of YOUSUI-EN</span>
+    <div class="yousui-card">
+      <div class="yousui-vis">
+        <div class="yousui-jp">羊 水 塩</div>
+        <div class="yousui-en">YOUSUI-EN &mdash; Mineral-Balanced Salt from Mother Sea</div>
+        <div class="yousui-catch">「生命は、海から。」</div>
+      </div>
+      <div class="yousui-info">
+        <h3>LPでの訴求ポイント</h3>
+        <p>国産天然塩と室戸海洋深層水のニガリを独自配合。人間の体液に近いミネラルバランスを実現した、他に類を見ない調整塩です。</p>
+        <ul class="yousui-specs">
+          <li><span class="sl">原料</span><span class="sv">国産天然塩 + 室戸海洋深層水ニガリ</span></li>
+          <li><span class="sl">内容量</span><span class="sv">500g</span></li>
+          <li><span class="sl">価格</span><span class="sv">¥400（税込）/ 20袋入 ¥8,000</span></li>
+          <li><span class="sl">差別化</span><span class="sv">他社食塩の10倍以上のミネラル含有</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="usage-grid">
+      <div class="usage-i"><div class="usage-icon">&#127858;</div><h4>調理</h4><p>素材の旨みを引き出す</p></div>
+      <div class="usage-i"><div class="usage-icon">&#129380;</div><h4>飲用</h4><p>ミネラル補給に</p></div>
+      <div class="usage-i"><div class="usage-icon">&#128704;</div><h4>浴用</h4><p>塩風呂として</p></div>
+      <div class="usage-i"><div class="usage-icon">&#10024;</div><h4>洗浄</h4><p>頭皮・肌のケアに</p></div>
+      <div class="usage-i"><div class="usage-icon">&#128588;</div><h4>塗布</h4><p>マッサージソルトに</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 5: ミネラル比較 ─── -->
+<div class="slide slide-alt" data-idx="5">
+  <div class="slide-inner">
+    <span class="sec-num">Section 04-2</span>
+    <h2 class="sec-title">ミネラル含有量の比較</h2>
+    <span class="sec-title-en">Mineral Comparison — Why YOUSUI-EN</span>
+    <p class="sec-lead" style="margin-bottom:28px">LPでは、このデータを美しいグラフで視覚化。<br>「他社の10倍以上」のインパクトを一目で伝えます。</p>
+
+    <div class="mineral-box">
+      <h3>羊水塩 vs 一般的な食塩（100gあたり）</h3>
+      <p class="msub">※ 数値はサンプル値です。正式データに差し替えます</p>
+      <div class="m-row"><div class="m-label">マグネシウム</div><div class="m-bars"><div class="m-bar-w"><span class="m-bar-tag accent" style="font-weight:700">羊水塩</span><div class="m-bar y" data-width="90%" style="min-width:50px">1,290mg</div></div><div class="m-bar-w"><span class="m-bar-tag">一般食塩</span><div class="m-bar o" data-width="8%" style="min-width:42px">100mg</div></div></div></div>
+      <div class="m-row"><div class="m-label">カリウム</div><div class="m-bars"><div class="m-bar-w"><span class="m-bar-tag accent" style="font-weight:700">羊水塩</span><div class="m-bar y" data-width="75%" style="min-width:50px">680mg</div></div><div class="m-bar-w"><span class="m-bar-tag">一般食塩</span><div class="m-bar o" data-width="7%" style="min-width:42px">60mg</div></div></div></div>
+      <div class="m-row"><div class="m-label">カルシウム</div><div class="m-bars"><div class="m-bar-w"><span class="m-bar-tag accent" style="font-weight:700">羊水塩</span><div class="m-bar y" data-width="60%" style="min-width:50px">520mg</div></div><div class="m-bar-w"><span class="m-bar-tag">一般食塩</span><div class="m-bar o" data-width="5%" style="min-width:42px">40mg</div></div></div></div>
+      <div class="m-row"><div class="m-label">鉄</div><div class="m-bars"><div class="m-bar-w"><span class="m-bar-tag accent" style="font-weight:700">羊水塩</span><div class="m-bar y" data-width="45%" style="min-width:50px">8.2mg</div></div><div class="m-bar-w"><span class="m-bar-tag">一般食塩</span><div class="m-bar o" data-width="3%" style="min-width:42px">微量</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 6: プラットフォーム比較 ─── -->
+<div class="slide" data-idx="6">
+  <div class="slide-inner">
+    <span class="sec-num">Section 05</span>
+    <h2 class="sec-title">販売プラットフォーム手数料の比較</h2>
+    <span class="sec-title-en">Platform Fee Comparison</span>
+
+    <table class="plat-table">
+      <thead>
+        <tr><th style="text-align:left">比較項目</th><th>Amazon</th><th>さとふる<br><small>（ふるさと納税）</small></th><th class="hl">自社サイト</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>販売手数料</td><td>8〜15%</td><td>—</td><td class="hc">0%</td></tr>
+        <tr><td>決済手数料</td><td>—<br><small class="muted">販売手数料に含む</small></td><td>—</td><td class="hc">3.6%前後<br><small class="muted">Stripe / Square等</small></td></tr>
+        <tr><td>月額固定費</td><td>¥4,900/月<br><small class="muted">大口出品</small></td><td>—</td><td class="hc">¥0〜2,000/月<br><small class="muted">サーバー費用のみ</small></td></tr>
+        <tr><td>ポータル掲載料</td><td>—</td><td>寄付額の約12%<br><small class="muted">自治体負担</small></td><td class="hc">0%</td></tr>
+        <tr><td>FBA / 配送手数料</td><td>¥500〜/個<br><small class="muted">FBA利用時</small></td><td>実費</td><td class="hc">実費のみ</td></tr>
+        <tr><td>顧客データ</td><td class="t-red">取得不可</td><td class="t-red">取得不可</td><td class="hc t-green">取得可能</td></tr>
+        <tr><td>ブランド訴求</td><td class="muted">制限あり</td><td class="muted">制限あり</td><td class="hc t-green">自由自在</td></tr>
+        <tr><td>リピーター施策</td><td class="t-red">困難</td><td class="t-red">不可</td><td class="hc t-green">メルマガ・会員制等</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td><strong>実質手数料率</strong><br><small class="muted" style="font-weight:400">羊水塩 ¥400販売時</small></td><td style="color:var(--red);font-weight:700">約15〜22%</td><td>—<br><small class="muted" style="font-weight:400">直接比較不可</small></td><td class="hc">約3.6%</td></tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 7: 手数料ビジュアル ─── -->
+<div class="slide slide-alt" data-idx="7">
+  <div class="slide-inner">
+    <span class="sec-num">Section 05-2</span>
+    <h2 class="sec-title">自社サイトの利益優位性</h2>
+    <span class="sec-title-en">Profit Advantage of Direct Sales</span>
+
+    <div class="fee-vis">
+      <h4>¥10,000 販売した場合の手取り比較</h4>
+      <div class="fee-row"><span class="fee-lbl">Amazon</span><div class="fee-track"><div class="fee-fill amazon" data-width="20%">手数料 ¥2,000</div></div><span class="fee-note" style="color:var(--red)">¥8,000</span></div>
+      <div class="fee-row"><span class="fee-lbl">自社サイト</span><div class="fee-track"><div class="fee-fill self" data-width="3.6%">¥360</div></div><span class="fee-note" style="color:var(--green)">¥9,640</span></div>
+      <div class="fee-save">
+        <span class="fee-save-icon">&#128176;</span>
+        <div class="fee-save-txt"><h4>自社サイトなら手数料を大幅削減</h4><p>¥10,000あたり約¥1,640の差。月商50万円なら年間で約100万円の利益改善に。<br>さらに顧客データの蓄積でリピーター施策も可能になります。</p></div>
+        <span class="fee-save-num">+¥1,640</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 8: LP構成 ─── -->
+<div class="slide" data-idx="8">
+  <div class="slide-inner">
+    <span class="sec-num">Section 06</span>
+    <h2 class="sec-title">制作するLPの構成</h2>
+    <span class="sec-title-en">Page Structure</span>
+    <p class="sec-lead" style="margin-bottom:24px">1ページ完結型。スクロールで貴社のストーリーが自然に伝わる構成です。</p>
+    <div class="struct-grid">
+      <div class="struct-card"><span class="sn">01</span><div class="struct-icon" style="background:var(--blue-light)">&#127754;</div><h3>ヒーロー</h3><p>「天下一」全画面ビジュアル</p></div>
+      <div class="struct-card"><span class="sn">02</span><div class="struct-icon" style="background:#f5efe5">&#128220;</div><h3>由緒</h3><p>450年の歴史を重厚に</p></div>
+      <div class="struct-card"><span class="sn">03</span><div class="struct-icon" style="background:#f5efe5">&#127913;</div><h3>鯨屋について</h3><p>紋章・屋号の由来</p></div>
+      <div class="struct-card"><span class="sn">04</span><div class="struct-icon" style="background:var(--green-light)">&#129474;</div><h3>羊水塩</h3><p>商品の世界観を演出</p></div>
+      <div class="struct-card"><span class="sn">05</span><div class="struct-icon" style="background:var(--blue-light)">&#128202;</div><h3>成分比較</h3><p>ミネラルを視覚化</p></div>
+      <div class="struct-card"><span class="sn">06</span><div class="struct-icon" style="background:#fef5e5">&#128161;</div><h3>使い方</h3><p>5つの用途を紹介</p></div>
+      <div class="struct-card"><span class="sn">07</span><div class="struct-icon" style="background:#f0e8f5">&#128240;</div><h3>メディア掲載</h3><p>雑誌掲載実績</p></div>
+      <div class="struct-card"><span class="sn">08</span><div class="struct-icon" style="background:var(--green-light)">&#128222;</div><h3>会社情報・購入</h3><p>問合せ・購入導線</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 9: スケジュール ─── -->
+<div class="slide slide-alt" data-idx="9">
+  <div class="slide-inner">
+    <span class="sec-num">Section 07</span>
+    <h2 class="sec-title">制作スケジュール</h2>
+    <span class="sec-title-en">Schedule</span>
+
+    <div class="tl">
+      <div class="tl-item"><div class="tl-phase"><span class="tl-phase-l">STEP 1</span><span class="tl-phase-w">1週目</span></div><span class="tl-dot"></span><div class="tl-content"><h3>ヒアリング・素材収集</h3><p>写真素材のご提供、テキスト確認、ご要望の最終すり合わせ</p></div></div>
+      <div class="tl-item"><div class="tl-phase"><span class="tl-phase-l">STEP 2</span><span class="tl-phase-w">2〜3週目</span></div><span class="tl-dot"></span><div class="tl-content"><h3>デザイン・先行実装</h3><p>ヒーロー・由緒・鯨屋紹介の3セクションを先行制作。中間確認を実施</p></div></div>
+      <div class="tl-item"><div class="tl-phase"><span class="tl-phase-l">STEP 3</span><span class="tl-phase-w">4〜5週目</span></div><span class="tl-dot"></span><div class="tl-content"><h3>全セクション実装</h3><p>商品・成分比較・使い方・メディア掲載・お問い合わせの実装</p></div></div>
+      <div class="tl-item"><div class="tl-phase"><span class="tl-phase-l">STEP 4</span><span class="tl-phase-w">6週目</span></div><span class="tl-dot"></span><div class="tl-content"><h3>調整・テスト・公開</h3><p>レスポンシブ最適化、アニメーション調整、速度チェック、公開</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 10: 見積り ─── -->
+<div class="slide" data-idx="10">
+  <div class="slide-inner">
+    <span class="sec-num">Section 08</span>
+    <h2 class="sec-title">お見積り</h2>
+    <span class="sec-title-en">Pricing</span>
+
+    <table class="price-tbl">
+      <thead><tr><th>項目</th><th style="text-align:right">金額（税別）</th></tr></thead>
+      <tbody>
+        <tr><td><span>企画・ディレクション</span><div class="p-detail">ヒアリング、構成設計、コピーライティング方針</div></td><td class="p-val">¥000,000</td></tr>
+        <tr><td><span>デザイン制作</span><div class="p-detail">ビジュアルデザイン、和モダン演出、レスポンシブ設計</div></td><td class="p-val">¥000,000</td></tr>
+        <tr><td><span>コーディング・実装</span><div class="p-detail">Next.js 15 / Tailwind CSS / スクロールアニメーション</div></td><td class="p-val">¥000,000</td></tr>
+        <tr><td><span>コピーライティング</span><div class="p-detail">日本語・英語ブランドコピー、各セクションテキスト</div></td><td class="p-val">¥000,000</td></tr>
+        <tr><td><span>テスト・公開作業</span><div class="p-detail">ブラウザテスト、速度最適化、サーバー設定、公開</div></td><td class="p-val">¥000,000</td></tr>
+      </tbody>
+    </table>
+    <div class="price-total"><span class="price-total-l">合計（税別）</span><span class="price-total-v">¥000,000</span></div>
+    <div class="price-note">※ 上記は概算です。ヒアリング後に正式なお見積りをお出しいたします。<br>※ 写真撮影が必要な場合は別途ご相談ください。<br>※ 公開後の保守・更新は別途月額プランをご用意しております。</div>
+  </div>
+</div>
+
+<!-- ─── 11: CLOSING ─── -->
+<div class="slide slide-alt" data-idx="11">
+  <div class="slide-inner" style="text-align:center">
+    <div class="closing-line"></div>
+    <p class="closing-text">
+      四百五十年の歴史に、ふさわしい佇まいを。<br>
+      「天下一」の塩を、「天下一」のサイトで。
+    </p>
+    <p class="closing-sub">ご不明点やご要望がございましたら、お気軽にご連絡ください。</p>
+    <div class="footer-co" style="margin-top:56px">YOUR COMPANY NAME</div>
+    <div class="footer-info">担当: ○○ ○○<br>TEL: 000-0000-0000 / EMAIL: info@example.com</div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- Navigation -->
+<div class="nav-bar">
+  <div class="nav-pages"><span class="current" id="currentPage">1</span> / <span id="totalPages">12</span></div>
+  <div class="nav-center" id="navDots"></div>
+  <div class="nav-btns">
+    <button class="nav-btn" id="btnPrev" title="前へ (←)">&#8592;</button>
+    <button class="nav-btn" id="btnNext" title="次へ (→)">&#8594;</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const progressFill = document.getElementById('progressFill');
+  const currentPage = document.getElementById('currentPage');
+  const totalPages = document.getElementById('totalPages');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const navDots = document.getElementById('navDots');
+
+  totalPages.textContent = total;
+
+  // Build dots
+  for(let i = 0; i < total; i++){
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    navDots.appendChild(dot);
+  }
+  const dots = navDots.querySelectorAll('.nav-dot');
+
+  function goTo(idx){
+    if(idx < 0 || idx >= total || idx === current) return;
+    const dir = idx > current ? 1 : -1;
+    slides[current].classList.remove('active');
+    slides[current].classList.add(dir > 0 ? 'prev' : '');
+    slides[current].style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+
+    current = idx;
+    slides[current].classList.remove('prev');
+    slides[current].classList.add('active');
+
+    // Animate bars in new slide
+    setTimeout(() => {
+      slides[current].querySelectorAll('[data-width]').forEach(el => {
+        el.style.width = el.dataset.width;
+      });
+      slides[current].querySelectorAll('.donut-arc').forEach(arc => {
+        arc.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(.25,.46,.45,.94)';
+        arc.style.strokeDashoffset = arc.dataset.target;
+      });
+    }, 100);
+
+    updateUI();
+  }
+
+  function updateUI(){
+    currentPage.textContent = current + 1;
+    progressFill.style.width = ((current + 1) / total * 100) + '%';
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === total - 1;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext.addEventListener('click', () => goTo(current + 1));
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+    if(e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+    if(e.key === 'Home') { e.preventDefault(); goTo(0); }
+    if(e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if(Math.abs(diff) > 50){
+      diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    }
+  }, {passive:true});
+
+  // Init
+  updateUI();
+  // Animate first slide bars
+  setTimeout(() => {
+    slides[0].querySelectorAll('[data-width]').forEach(el => el.style.width = el.dataset.width);
+  }, 300);
+})();
+</script>
+
+</body>
+</html>
