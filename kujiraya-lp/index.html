@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>泉州塩業 鯨屋 | SENSYU ENGYO KUJIRAYA — SINCE 1532</title>
+  <meta name="description" content="天文年間より四百九十年。泉州にただ一軒、塩を造り続ける。天下一と称された格式ある塩造りの伝統。羊水塩 — 鯨屋謹製ミネラル調整塩。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400&family=Noto+Serif+JP:wght@400;700;900&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS Variables ===== */
+    :root {
+      --shikkoku: #0a0a0a;
+      --noukon: #0f1419;
+      --kinari: #f4ede4;
+      --washi: #e8dfd4;
+      --shu: #a63d2a;
+      --kinpaku: #b8935a;
+      --ai: #1a3a52;
+      --sumi: #2a2a2a;
+      --font-shippori: 'Shippori Mincho B1', serif;
+      --font-serif-jp: 'Noto Serif JP', serif;
+      --font-sans-jp: 'Noto Sans JP', sans-serif;
+      --font-garamond: 'Cormorant Garamond', serif;
+      --font-cinzel: 'Cinzel', serif;
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--shikkoku);
+      color: var(--kinari);
+      font-family: var(--font-sans-jp), sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 2;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    ::selection { background: var(--ai); color: var(--kinari); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--shikkoku); }
+    ::-webkit-scrollbar-thumb { background: var(--sumi); border-radius: 3px; }
+
+    /* ===== Utilities ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, var(--kinpaku), transparent); }
+    .vertical-rl { writing-mode: vertical-rl; text-orientation: mixed; }
+    .washi-texture { position: relative; }
+    .washi-texture::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+    .washi-texture > * { position: relative; z-index: 2; }
+
+    /* ===== Fade-in animation ===== */
+    .fade-in {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+
+    /* ===== Loading ===== */
+    #loading {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 32px;
+      background: var(--shikkoku);
+      transition: opacity 0.8s ease-in-out;
+    }
+    #loading.hide { opacity: 0; pointer-events: none; }
+    #loading .logo-wrap { opacity: 0; transform: scale(0.92); animation: logoIn 1s 0.2s ease-out forwards; }
+    #loading .gold-line-anim { width: 0; animation: lineGrow 0.8s 0.8s ease-out forwards; }
+    #loading .company-name { opacity: 0; transform: translateY(8px); animation: textUp 0.8s 1.0s ease-out forwards; }
+    #loading .trade-name { opacity: 0; transform: translateY(8px); animation: textUp 0.8s 1.4s ease-out forwards; }
+    #loading .en-name { opacity: 0; animation: fadeOnly 0.8s 1.8s ease-out forwards; }
+    @keyframes logoIn { to { opacity: 1; transform: scale(1); } }
+    @keyframes lineGrow { to { width: 60px; } }
+    @keyframes textUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeOnly { to { opacity: 1; } }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1920&q=80&auto=format') center/cover no-repeat;
+    }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.4), rgba(0,0,0,0.6)); }
+    .hero-content {
+      position: relative; z-index: 10; width: 100%; padding: 100px 24px 120px;
+      display: flex; flex-direction: column; align-items: center; gap: 48px;
+    }
+    @media (min-width: 768px) {
+      .hero-content { flex-direction: row; padding: 100px 64px 120px; gap: 32px; }
+    }
+    .hero-text { flex: 1; text-align: center; }
+    @media (min-width: 768px) { .hero-text { text-align: left; } }
+    .hero-product { flex: 1; display: flex; justify-content: center; position: relative; }
+    .hero-product img { max-width: 420px; width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
+    .hero-product-spec {
+      position: absolute; bottom: -12px; left: -8px;
+      background: rgba(10,10,10,0.8); backdrop-filter: blur(8px);
+      border: 1px solid rgba(184,147,90,0.15); padding: 12px 20px;
+    }
+    .hero-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+    }
+    .hero-bottom-bar {
+      background: rgba(10,10,10,0.6); backdrop-filter: blur(8px);
+      padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .scroll-line {
+      width: 1px; height: 32px; background: rgba(244,237,228,0.15); display: inline-block;
+      animation: scrollPulse 2s infinite;
+    }
+    @keyframes scrollPulse {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ===== Char fade-in ===== */
+    .char-fade span {
+      opacity: 0; display: inline-block;
+      animation: charIn 0.6s ease-out forwards;
+    }
+
+    @keyframes charIn { to { opacity: 1; } }
+
+    /* ===== Section shared ===== */
+    section { position: relative; }
+    .section-pad { padding: 96px 0; }
+    @media (min-width: 768px) { .section-pad { padding: 160px 0; } }
+    .section-title-en {
+      font-family: var(--font-garamond); font-size: 12px; letter-spacing: 0.3em;
+      color: rgba(184,147,90,0.5); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title-ja {
+      font-family: var(--font-shippori); font-size: 28px; font-weight: 700;
+      letter-spacing: 0.15em; margin-bottom: 24px;
+    }
+    @media (min-width: 768px) { .section-title-ja { font-size: 32px; } }
+    .section-title-line { width: 64px; }
+
+    /* ===== History ===== */
+    .history { background: var(--noukon); min-height: 100vh; display: flex; align-items: center; }
+    .history-grid { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+    @media (min-width: 768px) { .history-grid { flex-direction: row; gap: 64px; } }
+    .history-text { flex: 1; }
+    .history-text p {
+      font-family: var(--font-shippori); font-size: 20px; font-weight: 700;
+      letter-spacing: 0.15em; text-align: center; line-height: 2.2;
+      color: rgba(244,237,228,0.9);
+    }
+    @media (min-width: 768px) { .history-text p { font-size: 24px; } }
+    .history-image { flex: 1; max-width: 400px; }
+    .history-image img { border: 1px solid rgba(184,147,90,0.2); width: 100%; }
+    .history-image-overlay {
+      position: relative;
+    }
+    .history-image-overlay::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,20,25,0.5), transparent, rgba(15,20,25,0.2));
+      pointer-events: none;
+    }
+    .history-sub {
+      color: rgba(244,237,228,0.35); font-size: 14px; line-height: 2.2;
+      text-align: center; max-width: 400px; margin: 0 auto;
+    }
+
+    /* ===== About ===== */
+    .about { background: var(--shikkoku); }
+    .about-grid { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+    @media (min-width: 768px) { .about-grid { flex-direction: row; gap: 64px; } }
+    .about-logo { flex-shrink: 0; text-align: center; }
+    .about-text { flex: 1; }
+    .about-text h3 {
+      font-family: var(--font-serif-jp); font-size: 18px; letter-spacing: 0.1em;
+      color: rgba(184,147,90,0.8); margin-bottom: 16px;
+    }
+    .about-text p { color: rgba(244,237,228,0.7); font-size: 14px; line-height: 2.2; }
+    .stamp-box {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; border: 2px solid rgba(166,61,42,0.6);
+      font-family: var(--font-shippori); color: rgba(166,61,42,0.8); font-weight: 700;
+    }
+
+    /* ===== Philosophy ===== */
+    .philosophy { background: var(--shikkoku); }
+    .philosophy-story p {
+      text-align: center; line-height: 2.5; margin-bottom: 32px;
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; margin-top: 80px; }
+    .stat-number {
+      font-family: var(--font-garamond); font-size: 48px; color: var(--kinpaku); font-weight: 700;
+    }
+    @media (min-width: 768px) { .stat-number { font-size: 56px; } }
+    .stat-label { color: rgba(244,237,228,0.4); font-size: 12px; letter-spacing: 0.1em; margin-top: 8px; }
+
+    /* ===== Product ===== */
+    .product { background: var(--shikkoku); }
+    .product-header { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-bottom: 64px; }
+    @media (min-width: 768px) { .product-header { flex-direction: row; gap: 48px; align-items: flex-start; } }
+    .product-title-vertical {
+      font-family: var(--font-shippori); font-size: 72px; font-weight: 700;
+      letter-spacing: 0.3em; display: none;
+    }
+    @media (min-width: 768px) { .product-title-vertical { display: block; } }
+    .product-title-horizontal {
+      font-family: var(--font-shippori); font-size: 56px; font-weight: 700;
+      letter-spacing: 0.3em; text-align: center;
+    }
+    @media (min-width: 768px) { .product-title-horizontal { display: none; } }
+    .product-grid { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+    @media (min-width: 768px) { .product-grid { flex-direction: row; gap: 64px; } }
+    .product-image { flex: 1; text-align: center; }
+    .product-image img { max-width: 380px; width: 100%; }
+    .product-specs { flex: 1; }
+    .spec-row { display: flex; align-items: baseline; gap: 16px; padding: 12px 0; }
+    .spec-label {
+      font-family: var(--font-garamond); font-size: 12px; letter-spacing: 0.2em;
+      color: rgba(184,147,90,0.6); text-transform: uppercase; width: 80px; flex-shrink: 0;
+    }
+    .spec-value { font-size: 14px; color: rgba(244,237,228,0.7); }
+    .spec-price { font-family: var(--font-garamond); font-size: 24px; color: var(--kinari); }
+
+    /* ===== Mineral Chart ===== */
+    .mineral { background: var(--noukon); }
+    .mineral-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (min-width: 768px) { .mineral-cards { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+    .mineral-card {
+      border: 1px solid rgba(184,147,90,0.1); background: rgba(10,10,10,0.4);
+      padding: 24px; text-align: center; position: relative; overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .mineral-card:hover { border-color: rgba(184,147,90,0.25); }
+    .mineral-symbol {
+      position: absolute; top: 8px; right: 12px;
+      font-family: var(--font-garamond); font-size: 48px; color: rgba(184,147,90,0.1); font-weight: 700;
+    }
+    .mineral-name { font-family: var(--font-serif-jp); font-size: 14px; color: rgba(244,237,228,0.7); letter-spacing: 0.1em; }
+    .mineral-ratio { font-family: var(--font-garamond); font-size: 42px; color: var(--kinpaku); font-weight: 700; margin: 12px 0; }
+    .mineral-ratio-suffix { font-size: 18px; color: rgba(184,147,90,0.6); }
+    .mineral-bars { display: flex; align-items: flex-end; justify-content: center; gap: 16px; height: 140px; margin: 16px 0; }
+    .mineral-bar-wrap { width: 44px; height: 130px; background: rgba(42,42,42,0.3); position: relative; overflow: hidden; display: flex; align-items: flex-end; }
+    .mineral-bar-fill {
+      width: 100%; transition: height 1.5s ease-out; height: 0;
+      position: relative;
+    }
+    .mineral-bar-fill.gold {
+      background: linear-gradient(to top, rgba(184,147,90,0.9), rgba(184,147,90,0.5), rgba(184,147,90,0.3));
+      box-shadow: 0 0 12px rgba(184,147,90,0.2);
+    }
+    .mineral-bar-fill.gray { background: rgba(244,237,228,0.1); }
+    .mineral-bar-fill.visible { height: var(--bar-height); }
+    .mineral-bar-label { font-size: 9px; letter-spacing: 0.1em; margin-top: 6px; text-align: center; }
+    .mineral-values { border-top: 1px solid rgba(184,147,90,0.1); padding-top: 12px; margin-top: 8px; }
+    .mineral-val-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .mineral-val-label { font-size: 10px; }
+    .mineral-val-num { font-family: var(--font-garamond); font-size: 15px; }
+
+    /* ===== Product Lineup ===== */
+    .lineup { background: var(--shikkoku); }
+    .lineup-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 768px) { .lineup-grid { grid-template-columns: repeat(2, 1fr); } }
+    .lineup-card {
+      border: 1px solid rgba(184,147,90,0.1); background: rgba(42,42,42,0.1);
+      overflow: hidden; transition: border-color 0.3s;
+    }
+    .lineup-card:hover { border-color: rgba(184,147,90,0.25); }
+    .lineup-card-image { padding: 24px; background: linear-gradient(to bottom, rgba(42,42,42,0.2), transparent); text-align: center; position: relative; }
+    .lineup-card-image img { max-width: 300px; margin: 0 auto; }
+    .lineup-badge {
+      position: absolute; top: 16px; right: 16px;
+      font-family: var(--font-shippori); font-size: 10px; letter-spacing: 0.1em;
+      background: rgba(184,147,90,0.8); color: var(--shikkoku); padding: 4px 12px;
+    }
+    .lineup-card-body { padding: 24px; }
+    .lineup-card-body h3 { font-family: var(--font-shippori); font-size: 18px; font-weight: 700; letter-spacing: 0.1em; }
+    .lineup-card-bottom { display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; border-top: 1px solid rgba(184,147,90,0.1); margin-top: 12px; }
+    .lineup-card-price { font-family: var(--font-garamond); font-size: 24px; }
+
+    /* portable salt */
+    .portable-card {
+      border: 1px solid rgba(184,147,90,0.1); background: rgba(42,42,42,0.1);
+      padding: 32px; display: flex; flex-direction: column; align-items: center; gap: 24px; margin-top: 24px;
+    }
+    @media (min-width: 768px) { .portable-card { flex-direction: row; } }
+    .portable-icon {
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 1px solid rgba(184,147,90,0.2); background: rgba(42,42,42,0.2);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-align: center;
+    }
+
+    /* ===== Usage ===== */
+    .usage { background: var(--shikkoku); }
+    .usage-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) { .usage-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .usage-grid { grid-template-columns: repeat(5, 1fr); } }
+    .usage-card {
+      border: 1px solid rgba(184,147,90,0.1); background: rgba(42,42,42,0.1);
+      overflow: hidden; cursor: pointer; transition: all 0.2s;
+    }
+    .usage-card:hover { transform: translateY(-2px) scale(1.02); background: rgba(42,42,42,0.2); }
+    .usage-card-img { position: relative; aspect-ratio: 1; overflow: hidden; }
+    .usage-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s; }
+    .usage-card:hover .usage-card-img img { transform: scale(1.05); }
+    .usage-card-img::after {
+      content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.4);
+      transition: background 0.5s;
+    }
+    .usage-card:hover .usage-card-img::after { background: rgba(0,0,0,0.3); }
+    .usage-card-catch {
+      position: absolute; bottom: 12px; left: 12px; right: 12px; z-index: 2;
+      font-family: var(--font-serif-jp); font-size: 12px; color: rgba(244,237,228,0.6);
+    }
+    .usage-card-body { padding: 16px; text-align: center; }
+    .usage-card-body h3 { font-family: var(--font-shippori); font-size: 18px; font-weight: 700; letter-spacing: 0.1em; }
+    .usage-card-body .en { font-family: var(--font-garamond); font-size: 10px; letter-spacing: 0.25em; color: rgba(244,237,228,0.3); text-transform: uppercase; }
+    .usage-detail {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s;
+      opacity: 0; font-size: 12px; color: rgba(244,237,228,0.6); line-height: 2;
+      border-top: 1px solid rgba(184,147,90,0.1); margin-top: 12px; padding-top: 12px;
+      text-align: left;
+    }
+    .usage-card.open .usage-detail { max-height: 200px; opacity: 1; }
+
+    /* ===== Testimonials ===== */
+    .testimonials { background: var(--noukon); }
+    .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+    .testimonial-card {
+      border: 1px solid rgba(184,147,90,0.1); background: rgba(10,10,10,0.3);
+      padding: 32px; display: flex; flex-direction: column; transition: border-color 0.3s;
+    }
+    .testimonial-card:hover { border-color: rgba(184,147,90,0.25); }
+    .testimonial-quote {
+      font-family: var(--font-garamond); font-size: 40px; color: rgba(184,147,90,0.2); line-height: 1; margin-bottom: 12px;
+    }
+    .testimonial-text { color: rgba(244,237,228,0.6); font-size: 14px; line-height: 2.2; flex: 1; }
+    .testimonial-author {
+      margin-top: 20px; padding-top: 12px; border-top: 1px solid rgba(184,147,90,0.1);
+    }
+    .testimonial-author .name { font-family: var(--font-garamond); font-size: 14px; color: rgba(244,237,228,0.7); letter-spacing: 0.1em; }
+    .testimonial-author .role { font-size: 12px; color: rgba(244,237,228,0.3); margin-top: 4px; }
+
+    /* ===== Press ===== */
+    .press { background: var(--noukon); }
+    .press-images { display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
+    @media (min-width: 768px) { .press-images { grid-template-columns: repeat(2, 1fr); } }
+    .press-card { border: 1px solid rgba(184,147,90,0.1); overflow: hidden; background: rgba(42,42,42,0.1); }
+    .press-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; transition: transform 0.7s; }
+    .press-card:hover img { transform: scale(1.02); }
+    .press-card-body { padding: 16px; }
+    .press-other { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px; }
+    @media (min-width: 768px) { .press-other { gap: 40px; } }
+    .press-other span {
+      font-family: var(--font-garamond); font-size: 20px; font-style: italic;
+      color: var(--kinari); letter-spacing: 0.1em; opacity: 0.4; transition: opacity 0.5s; cursor: default;
+    }
+    @media (min-width: 768px) { .press-other span { font-size: 24px; } }
+    .press-other span:hover { opacity: 1; }
+
+    /* ===== Contact ===== */
+    .contact { background: var(--shikkoku); }
+    .contact-grid { display: flex; flex-direction: column; gap: 48px; }
+    @media (min-width: 1024px) { .contact-grid { flex-direction: row; gap: 64px; } }
+    .contact-grid > div { flex: 1; }
+    .contact-info h3 { font-family: var(--font-shippori); font-size: 20px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .contact-map iframe {
+      width: 100%; height: 300px; border: 1px solid rgba(184,147,90,0.1);
+      filter: invert(90%) hue-rotate(180deg) saturate(0.3) brightness(0.6);
+    }
+    .cta-link {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1px solid rgba(184,147,90,0.2); padding: 16px 24px; transition: background 0.3s;
+    }
+    .cta-link:hover { background: rgba(184,147,90,0.05); }
+    .cta-link .arrow { font-family: var(--font-garamond); font-size: 18px; color: rgba(184,147,90,0.4); transition: color 0.3s; }
+    .cta-link:hover .arrow { color: rgba(184,147,90,0.7); }
+
+    /* ===== Footer ===== */
+    footer {
+      background: var(--shikkoku); border-top: 1px solid rgba(184,147,90,0.1);
+      padding: 64px 24px; text-align: center;
+    }
+
+    /* ===== Sticky CTA ===== */
+    #sticky-cta {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+      border-top: 1px solid rgba(184,147,90,0.15);
+      transform: translateY(100%); transition: transform 0.3s;
+    }
+    #sticky-cta.visible { transform: translateY(0); }
+    #sticky-cta .inner {
+      background: rgba(10,10,10,0.9); backdrop-filter: blur(12px);
+      padding: 10px 24px; display: flex; align-items: center; justify-content: flex-end; gap: 12px;
+    }
+    @media (min-width: 768px) { #sticky-cta .inner { justify-content: space-between; } }
+    #sticky-cta .cta-info { display: none; }
+    @media (min-width: 768px) { #sticky-cta .cta-info { display: block; } }
+    #sticky-cta .cta-btn {
+      display: inline-flex; align-items: center; padding: 10px 24px;
+      background: rgba(184,147,90,0.9); transition: background 0.3s;
+      font-family: var(--font-shippori); font-size: 14px; color: var(--shikkoku); font-weight: 700; letter-spacing: 0.1em;
+    }
+    #sticky-cta .cta-btn:hover { background: var(--kinpaku); }
+
+    /* ===== CountUp ===== */
+    .count-up { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+
+<!-- ===== Loading ===== -->
+<div id="loading">
+  <div class="logo-wrap">
+    <svg width="140" height="140" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="95" stroke="#b8935a" stroke-width="1"/>
+      <circle cx="100" cy="100" r="88" stroke="#b8935a" stroke-width="0.5"/>
+      <text fill="#b8935a" font-family="Cinzel,serif" font-size="9" letter-spacing="0.15em"><textPath href="#uA" startOffset="50%" text-anchor="middle">SENSYU ENGYO</textPath></text>
+      <defs><path id="uA" d="M 30 100 A 70 70 0 0 1 170 100"/></defs>
+      <text fill="#b8935a" font-family="Cinzel,serif" font-size="9" letter-spacing="0.15em"><textPath href="#lA" startOffset="50%" text-anchor="middle">KUJIRAYA</textPath></text>
+      <defs><path id="lA" d="M 35 115 A 70 70 0 0 0 165 115"/></defs>
+      <g transform="translate(100,95)" fill="#b8935a">
+        <path d="M-30 10Q-20 0-10 10Q0 20 10 10Q20 0 30 10" stroke="#b8935a" stroke-width="1.2" fill="none"/>
+        <path d="M-25 16Q-15 6-5 16Q5 26 15 16Q25 6 35 16" stroke="#b8935a" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <ellipse cx="0" cy="-8" rx="18" ry="8" opacity="0.9"/><path d="M16-10Q24-20 28-14Q26-8 18-6Z"/>
+        <circle cx="-8" cy="-10" r="1.5" fill="#0a0a0a"/>
+      </g>
+      <text x="100" y="160" fill="#b8935a" font-family="Cormorant Garamond,serif" font-size="8" text-anchor="middle" letter-spacing="0.2em" opacity="0.7">SINCE 1532</text>
+    </svg>
+  </div>
+  <div class="gold-line gold-line-anim" style="height:1px;background:linear-gradient(90deg,transparent,#b8935a,transparent)"></div>
+  <p class="company-name" style="font-family:var(--font-shippori);font-size:22px;letter-spacing:0.35em;color:rgba(244,237,228,0.9);font-weight:700;">泉州塩業株式会社</p>
+  <p class="trade-name" style="font-family:var(--font-shippori);font-size:44px;letter-spacing:0.5em;color:var(--kinari);font-weight:700;margin-top:-12px;">鯨屋</p>
+  <div class="en-name" style="text-align:center;margin-top:-8px;">
+    <p style="font-family:var(--font-cinzel);font-size:11px;letter-spacing:0.4em;color:rgba(184,147,90,0.5);">SENSYU ENGYO — KUJIRAYA</p>
+    <p style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.3em;color:rgba(244,237,228,0.25);margin-top:8px;">SINCE 1532</p>
+  </div>
+</div>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <p style="font-family:var(--font-garamond);font-size:11px;letter-spacing:0.4em;color:rgba(184,147,90,0.6);text-transform:uppercase;margin-bottom:16px;">KUJIRAYA — SINCE 1532</p>
+      <h1 style="font-family:var(--font-shippori);font-size:clamp(56px,12vw,120px);font-weight:700;letter-spacing:0.2em;line-height:1.3;">羊水塩</h1>
+      <p style="font-family:var(--font-garamond);font-size:15px;letter-spacing:0.3em;color:rgba(244,237,228,0.4);margin-top:4px;">YOUSUI-EN</p>
+      <div style="margin-top:24px;">
+        <p style="font-family:var(--font-shippori);font-size:clamp(20px,4vw,30px);font-weight:700;letter-spacing:0.15em;line-height:2;">生命は、海から。</p>
+        <p style="font-family:var(--font-garamond);font-size:14px;letter-spacing:0.2em;color:rgba(244,237,228,0.4);font-style:italic;margin-top:4px;">HEALING IN AQUA</p>
+      </div>
+      <p style="color:rgba(244,237,228,0.5);font-size:14px;line-height:2.2;margin-top:16px;max-width:420px;">
+        天文年間より四百九十年——<br>泉州にただ一軒残る塩屋「鯨屋」が造る、<br>人体液と同じミネラルバランスの塩。
+      </p>
+      <div style="margin-top:24px;display:flex;align-items:center;gap:16px;justify-content:center;" class="hero-badge-wrap">
+        <div style="display:flex;align-items:center;gap:12px;border:1px solid rgba(184,147,90,0.2);padding:8px 16px;">
+          <span style="font-family:var(--font-shippori);font-size:18px;color:rgba(184,147,90,0.8);font-weight:700;letter-spacing:0.15em;">天下一</span>
+          <span style="font-size:10px;color:rgba(244,237,228,0.3);line-height:1.5;">江戸幕府より賜りし<br>最高品位の称号</span>
+        </div>
+        <div class="stamp-box" style="border-radius:50%;width:40px;height:40px;font-size:12px;transform:rotate(-3deg);">謹製</div>
+      </div>
+    </div>
+    <div class="hero-product">
+      <img src="https://www.sensyuengyo.jp/wp-content/uploads/box.jpg" alt="羊水塩 — 鯨屋謹製 ミネラル調整塩" />
+      <div class="hero-product-spec">
+        <p style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.2em;color:rgba(184,147,90,0.5);text-transform:uppercase;">Mineral-Balanced Salt</p>
+        <p style="color:rgba(244,237,228,0.7);font-size:12px;margin-top:4px;">500g &times; 20袋入</p>
+        <p style="font-family:var(--font-garamond);font-size:18px;margin-top:2px;">&yen;10,000</p>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="gold-line"></div>
+    <div class="hero-bottom-bar">
+      <p style="font-family:var(--font-garamond);font-size:11px;letter-spacing:0.3em;color:rgba(244,237,228,0.3);">
+        泉州塩業株式会社 鯨屋 <span style="font-family:var(--font-cinzel);margin-left:12px;" class="hide-mobile">SENSYU ENGYO — KUJIRAYA</span>
+      </p>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.3em;color:rgba(244,237,228,0.25);">scroll</span>
+        <span class="scroll-line"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== History ===== -->
+<section class="history washi-texture section-pad">
+  <div class="container">
+    <div class="history-grid">
+      <div class="history-text fade-in" style="flex:1;">
+        <p>天文年間に始まり、</p>
+        <p>四百九十年の歴史を誇る。</p>
+        <p>江戸時代、国内最高の調味塩と認められ、</p>
+        <p>「天下一」の称号を賜る。</p>
+        <div class="history-sub fade-in fade-in-delay-3" style="margin-top:40px;">
+          将軍の食卓を、大名の饗応を、<br>そして幕末にはペリー提督をもてなした塩。<br>その一粒に、日本の歴史が息づく。
+        </div>
+      </div>
+      <div class="history-image fade-in fade-in-delay-2" style="flex:1;">
+        <div class="history-image-overlay">
+          <img src="https://www.sensyuengyo.jp/wp-content/uploads/tenpoimage_w700.png" alt="泉州塩業 鯨屋 店舗" />
+        </div>
+        <p style="font-family:var(--font-garamond);font-size:11px;letter-spacing:0.2em;color:rgba(244,237,228,0.3);text-align:right;margin-top:12px;">泉州塩業 鯨屋 — 岸和田・天神山町</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== About ===== -->
+<section class="about section-pad">
+  <div class="container" style="max-width:960px;">
+    <div class="fade-in">
+      <p class="section-title-en">About KUJIRAYA</p>
+      <p class="section-title-ja">鯨屋について</p>
+      <div class="gold-line section-title-line"></div>
+    </div>
+    <div class="fade-in" style="text-align:center;margin:48px 0;">
+      <p style="font-family:var(--font-shippori);font-size:clamp(22px,5vw,36px);font-weight:700;letter-spacing:0.2em;line-height:2;">泉州に残る、最後の塩屋。</p>
+    </div>
+    <div class="fade-in fade-in-delay-1" style="text-align:center;margin-bottom:64px;">
+      <p style="color:rgba(244,237,228,0.4);font-size:14px;line-height:2.2;max-width:440px;margin:0 auto;">
+        かつて泉州の浜には数多の塩屋が軒を連ねた。<br>時代の波に一軒、また一軒と姿を消し、<br>今なお塩を造り続けるのは、鯨屋ただ一軒。
+      </p>
+    </div>
+    <div class="about-grid">
+      <div class="about-logo fade-in" style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <svg width="200" height="200" viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="95" stroke="#b8935a" stroke-width="1"/><circle cx="100" cy="100" r="88" stroke="#b8935a" stroke-width="0.5"/><text fill="#b8935a" font-family="Cinzel,serif" font-size="9" letter-spacing="0.15em"><textPath href="#uA2" startOffset="50%" text-anchor="middle">SENSYU ENGYO</textPath></text><defs><path id="uA2" d="M 30 100 A 70 70 0 0 1 170 100"/></defs><text fill="#b8935a" font-family="Cinzel,serif" font-size="9" letter-spacing="0.15em"><textPath href="#lA2" startOffset="50%" text-anchor="middle">KUJIRAYA</textPath></text><defs><path id="lA2" d="M 35 115 A 70 70 0 0 0 165 115"/></defs><g transform="translate(100,95)" fill="#b8935a"><path d="M-30 10Q-20 0-10 10Q0 20 10 10Q20 0 30 10" stroke="#b8935a" stroke-width="1.2" fill="none"/><path d="M-25 16Q-15 6-5 16Q5 26 15 16Q25 6 35 16" stroke="#b8935a" stroke-width="0.8" fill="none" opacity="0.5"/><ellipse cx="0" cy="-8" rx="18" ry="8" opacity="0.9"/><path d="M16-10Q24-20 28-14Q26-8 18-6Z"/><circle cx="-8" cy="-10" r="1.5" fill="#0a0a0a"/></g><text x="100" y="160" fill="#b8935a" font-family="Cormorant Garamond,serif" font-size="8" text-anchor="middle" letter-spacing="0.2em" opacity="0.7">SINCE 1532</text></svg>
+        <p style="font-family:var(--font-shippori);font-size:14px;letter-spacing:0.3em;color:rgba(184,147,90,0.7);">生命は、海から。</p>
+        <p style="font-family:var(--font-garamond);font-size:11px;letter-spacing:0.2em;color:rgba(244,237,228,0.3);font-style:italic;">HEALING IN AQUA</p>
+      </div>
+      <div class="about-text fade-in fade-in-delay-2">
+        <h3>鯨屋の名のもとに</h3>
+        <p>「鯨屋」——泉州の海とともに生きてきた由井家が、代々受け継ぐ屋号。鯨は古来より海の王であり、豊穣の象徴。その名を冠することは、海の恵みに対する畏敬と誇りの証である。</p>
+        <h3 style="margin-top:32px;">天文年間——一五三二年</h3>
+        <p>戦国の世、由井家は泉州の浜で塩造りを始めた。江戸期には幕府御用達の「天下一」の称号を賜り、将軍の膳、大名の饗応、そしてペリー来航の宴にも鯨屋の塩が供された。五世紀にわたり、製法と志を一途に守り続けている。</p>
+        <div style="display:flex;align-items:center;gap:20px;margin-top:24px;">
+          <div class="stamp-box" style="transform:rotate(-3deg);font-size:18px;">謹製</div>
+          <div class="stamp-box" style="border-radius:50%;transform:rotate(2deg);font-size:14px;">鯨屋</div>
+          <span style="color:rgba(244,237,228,0.25);font-size:12px;">鯨屋謹製</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== Philosophy ===== -->
+<section class="philosophy section-pad">
+  <div class="container" style="max-width:720px;">
+    <div class="fade-in" style="text-align:center;margin-bottom:48px;">
+      <p class="section-title-en">Why KUJIRAYA</p>
+      <h2 style="font-family:var(--font-shippori);font-size:clamp(22px,5vw,36px);font-weight:700;letter-spacing:0.15em;line-height:2;margin-top:24px;">あなたの身体は、<br>毎日の「塩」でできている。</h2>
+    </div>
+    <div class="philosophy-story">
+      <p class="fade-in" style="color:rgba(244,237,228,0.6);font-size:15px;">人間の体液は、太古の海水と同じイオン組成を持つ。<br>血液も、涙も、羊水も——すべて「海」の記憶。</p>
+      <p class="fade-in" style="color:rgba(244,237,228,0.6);font-size:15px;">だからこそ、塩は「何でもいい」ではない。<br>精製された塩化ナトリウム99%の食卓塩と、<br>海のミネラルをそのまま宿した天然塩では、<br>身体への届き方が、まるで違う。</p>
+      <div class="gold-line fade-in" style="width:64px;margin:40px auto;"></div>
+      <p class="fade-in" style="color:rgba(244,237,228,0.8);font-size:17px;font-family:var(--font-serif-jp);">鯨屋の羊水塩は、<br>室戸海洋深層水のニガリで<br>人体液と同じミネラルバランスに調整した、<br><span style="color:var(--kinpaku);">唯一無二のミネラル調整塩。</span></p>
+      <p class="fade-in" style="color:rgba(244,237,228,0.5);font-size:14px;">水1リットルに10グラム溶かすだけで、<br>羊水と同じイオン組成が再現される。<br>それは、「生命の海」を飲むということ。</p>
+    </div>
+    <div class="stats-grid fade-in">
+      <div><p class="stat-number count-up" data-target="490" data-duration="2500">0</p><p class="stat-label">年の歴史</p></div>
+      <div><p class="stat-number count-up" data-target="10" data-suffix="x" data-duration="1800">0</p><p class="stat-label">ミネラル含有量</p></div>
+      <div><p class="stat-number count-up" data-target="25" data-duration="2000">0</p><p class="stat-label">年のご愛顧</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== Product ===== -->
+<section class="product section-pad">
+  <div class="container" style="max-width:1100px;">
+    <div class="product-header">
+      <div class="product-title-vertical vertical-rl fade-in" style="flex-shrink:0;">羊水塩</div>
+      <div class="product-title-horizontal fade-in">羊水塩</div>
+      <div class="fade-in fade-in-delay-1" style="flex:1;">
+        <p style="font-family:var(--font-garamond);font-size:12px;letter-spacing:0.3em;color:rgba(184,147,90,0.5);text-transform:uppercase;margin-bottom:12px;">THALASSO THERAPIE — Mineral-Balanced Salt</p>
+        <p style="font-family:var(--font-shippori);font-size:clamp(22px,4vw,30px);font-weight:700;letter-spacing:0.15em;margin-bottom:8px;">生命は、海から。</p>
+        <p style="font-family:var(--font-garamond);font-size:14px;letter-spacing:0.15em;color:rgba(244,237,228,0.4);font-style:italic;margin-bottom:24px;">HEALING IN AQUA</p>
+        <div style="color:rgba(244,237,228,0.5);font-size:14px;line-height:2.2;max-width:500px;">
+          <p>太古の昔、生命は海の中で生まれた。</p>
+          <p style="margin-top:8px;">人は長い進化の途中で、海水を体内に閉じ込めたまま陸に上がった。</p>
+          <p style="margin-top:8px;">海水と人体液のイオン組成は、今でも同じ。<br>母体の羊水もまた、「太古の海」である。</p>
+          <p style="margin-top:8px;color:rgba(244,237,228,0.7);font-family:var(--font-serif-jp);">生命の源——「太古の海」と「羊水」を再現するのが、<br><span style="color:var(--kinari);letter-spacing:0.15em;">『羊水塩』</span>です。</p>
+        </div>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-image fade-in">
+        <img src="https://www.sensyuengyo.jp/wp-content/uploads/box.jpg" alt="羊水塩 500g×20袋入" />
+        <p style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.2em;color:rgba(244,237,228,0.25);text-align:center;margin-top:12px;">鯨屋謹製 羊水塩 500g &times; 20袋入</p>
+      </div>
+      <div class="product-specs fade-in fade-in-delay-2">
+        <p style="color:rgba(244,237,228,0.6);font-size:14px;line-height:2.2;margin-bottom:24px;">国産天然塩に、室戸海洋深層水由来のニガリを加え、人体液と同様のミネラルバランスに調整。1%水溶液（水1Lに10g）で、羊水・血漿と同じイオン組成を再現します。</p>
+        <div class="spec-row"><span class="spec-label">Raw</span><span class="spec-value">国産天然塩 + 室戸海洋深層水のニガリ</span></div>
+        <div class="gold-line"></div>
+        <div class="spec-row"><span class="spec-label">Type</span><span class="spec-value">ミネラル調整塩</span></div>
+        <div class="gold-line"></div>
+        <div class="spec-row"><span class="spec-label">Volume</span><span class="spec-value">500g / 袋</span></div>
+        <div class="gold-line"></div>
+        <div class="spec-row"><span class="spec-label">Price</span><span class="spec-value"><span class="spec-price">&yen;10,000</span> <span style="color:rgba(244,237,228,0.4);font-size:12px;">（20袋入・10kg）</span><br><span style="font-family:var(--font-garamond);font-size:18px;color:rgba(244,237,228,0.8);">&yen;5,000</span> <span style="color:rgba(244,237,228,0.4);font-size:12px;">（10袋入・5kg）</span></span></div>
+      </div>
+    </div>
+    <div class="fade-in" style="text-align:center;margin-top:48px;">
+      <img src="https://www.sensyuengyo.jp/wp-content/uploads/yousuien_10_201807_800_600.png" alt="羊水塩 10袋入り" style="max-width:280px;margin:0 auto;" />
+      <p style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.2em;color:rgba(244,237,228,0.25);margin-top:12px;">お試し用 10袋入（5kg）</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== Mineral Chart ===== -->
+<section class="mineral washi-texture section-pad">
+  <div class="container" style="max-width:960px;">
+    <div class="fade-in">
+      <p class="section-title-en">Mineral Composition</p>
+      <p class="section-title-ja">成分比較</p>
+      <div class="gold-line section-title-line"></div>
+    </div>
+    <div class="fade-in" style="text-align:center;margin:32px 0 16px;">
+      <p style="font-family:var(--font-shippori);font-size:clamp(18px,4vw,28px);font-weight:700;letter-spacing:0.15em;">
+        一般食塩の<span style="font-family:var(--font-garamond);font-size:clamp(32px,6vw,56px);color:var(--kinpaku);margin:0 8px;" class="count-up" data-target="10" data-duration="1500">0</span>倍以上のミネラル
+      </p>
+    </div>
+    <div class="fade-in" style="text-align:center;margin-bottom:48px;">
+      <p style="color:rgba(244,237,228,0.4);font-size:14px;line-height:2;max-width:420px;margin:0 auto;">「塩ならどれも同じ」ではない。<br>海洋深層水のニガリが生む、圧倒的なミネラル差。<br>数字が、鯨屋の塩の本質を語る。</p>
+    </div>
+    <div class="mineral-cards">
+      <div class="mineral-card fade-in"><span class="mineral-symbol">Mg</span><p class="mineral-name">マグネシウム</p><p class="mineral-ratio">15.6<span class="mineral-ratio-suffix">x</span></p><div class="mineral-bars"><div style="text-align:center;"><div class="mineral-bar-wrap"><div class="mineral-bar-fill gold" style="--bar-height:100%;"></div></div><p class="mineral-bar-label" style="color:rgba(184,147,90,0.7);">羊水塩</p></div><div style="text-align:center;"><div class="mineral-bar-wrap"><div class="mineral-bar-fill gray" style="--bar-height:6.4%;"></div></div><p class="mineral-bar-label" style="color:rgba(244,237,228,0.25);">食卓塩</p></div></div><div class="mineral-values"><div class="mineral-val-row"><span class="mineral-val-label" style="color:rgba(184,147,90,0.5);">羊水塩</span><span class="mineral-val-num" style="color:var(--kinari);">2,810mg</span></div><div class="mineral-val-row"><span class="mineral-val-label" style="color:rgba(244,237,228,0.25);">食卓塩</span><span class="mineral-val-num" style="color:rgba(244,237,228,0.3);">180mg</span></div></div></div>
+      <div class="mineral-card fade-in fade-in-delay-1"><span class="mineral-symbol">Ca</span><p class="mineral-name">カルシウム</p><p class="mineral-ratio">28.2<span class="mineral-ratio-suffix">x</span></p><div class="mineral-bars"><div style="text-align:center;"><div class="mineral-bar-wrap"><div class="mineral-bar-fill gold" style="--bar-height:22%;"></div></div><p class="mineral-bar-label" style="color:rgba(184,147,90,0.7);">羊水塩</p></div><div style="text-align:center;"><div class="mineral-bar-wrap"><div class="mineral-bar-fill gray" style="--bar-height:1.5%;"></div></div><p class="mineral-bar-label" style="color:rgba(244,237,228,0.25);">食卓塩</p></div></div><div class="mineral-values"><div class="mineral-val-row"><span class="mineral-val-label" style="color:rgba(184,147,90,0.5);">羊水塩</span><span class="mineral-val-num" style="color:var(--kinari);">620mg</span></div><div class="mineral-val-row"><span class="mineral-val-label" style="color:rgba(244,237,228,0.25);">食卓塩</span><span class="mineral-val-num" style="color:rgba(244,237,228,0.3);">22mg</span></div></div></div>
+      <div class="mineral-card fade-in fade-in-delay-2"><span class="mineral-symbol">K</span><p class="mineral-name">カリウム</p><p class="mineral-ratio">11.6<span class="mineral-ratio-suffix">x</span></p><div class="mineral-bars"><div style="text-align:center;"><div class="mineral-bar-wrap"><div class="mineral-bar-fill gold" style="--bar-height:41.3%;"></div></div><p class="mineral-bar-label" style="color:rgba(184,147,90,0.7);">羊水塩</p></div><div style="text-align:center;"><div class="mineral-bar-wrap"><div class="mineral-bar-fill gray" style="--bar-height:3.6%;"></div></div><p class="mineral-bar-label" style="color:rgba(244,237,228,0.25);">食卓塩</p></div></div><div class="mineral-values"><div class="mineral-val-row"><span class="mineral-val-label" style="color:rgba(184,147,90,0.5);">羊水塩</span><span class="mineral-val-num" style="color:var(--kinari);">1,160mg</span></div><div class="mineral-val-row"><span class="mineral-val-label" style="color:rgba(244,237,228,0.25);">食卓塩</span><span class="mineral-val-num" style="color:rgba(244,237,228,0.3);">100mg</span></div></div></div>
+      <div class="mineral-card fade-in fade-in-delay-3"><span class="mineral-symbol">Fe</span><p class="mineral-name">鉄</p><p class="mineral-ratio">&infin;</p><div class="mineral-bars"><div style="text-align:center;"><div class="mineral-bar-wrap"><div class="mineral-bar-fill gold" style="--bar-height:15%;"></div></div><p class="mineral-bar-label" style="color:rgba(184,147,90,0.7);">羊水塩</p></div><div style="text-align:center;"><div class="mineral-bar-wrap"><div class="mineral-bar-fill gray" style="--bar-height:0%;"></div></div><p class="mineral-bar-label" style="color:rgba(244,237,228,0.25);">食卓塩</p></div></div><div class="mineral-values"><div class="mineral-val-row"><span class="mineral-val-label" style="color:rgba(184,147,90,0.5);">羊水塩</span><span class="mineral-val-num" style="color:var(--kinari);">8.2mg</span></div><div class="mineral-val-row"><span class="mineral-val-label" style="color:rgba(244,237,228,0.25);">食卓塩</span><span class="mineral-val-num" style="color:rgba(244,237,228,0.3);">0mg</span></div></div></div>
+    </div>
+    <p class="fade-in" style="font-family:var(--font-garamond);font-size:11px;letter-spacing:0.15em;color:rgba(244,237,228,0.25);text-align:right;margin-top:32px;">※ 100gあたりの含有量。自社調べ。</p>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== Lineup ===== -->
+<section class="lineup section-pad">
+  <div class="container" style="max-width:960px;">
+    <div class="fade-in" style="text-align:center;margin-bottom:48px;">
+      <p class="section-title-en">Lineup</p>
+      <p class="section-title-ja" style="text-align:center;">商品ラインナップ</p>
+      <p style="color:rgba(244,237,228,0.4);font-size:14px;margin-top:12px;">四百九十年の歴史が生んだ、三つの塩。</p>
+    </div>
+    <div class="lineup-grid">
+      <div class="lineup-card fade-in">
+        <div class="lineup-card-image"><img src="https://www.sensyuengyo.jp/wp-content/uploads/box.jpg" alt="羊水塩 20袋入" /><span class="lineup-badge">一番人気</span></div>
+        <div class="lineup-card-body"><h3>羊水塩 20袋入</h3><p style="font-family:var(--font-serif-jp);font-size:12px;color:rgba(184,147,90,0.6);margin-top:4px;">ご家庭の定番に</p><p style="color:rgba(244,237,228,0.5);font-size:12px;line-height:2;margin-top:8px;">毎日の調理から飲用・浴用まで。ご家族でたっぷり使える大容量。リピーターの多くがこちらを選ばれています。</p><div class="lineup-card-bottom"><span style="color:rgba(244,237,228,0.5);font-size:12px;">500g &times; 20袋（10kg）</span><span class="lineup-card-price">&yen;10,000</span></div></div>
+      </div>
+      <div class="lineup-card fade-in fade-in-delay-1">
+        <div class="lineup-card-image"><img src="https://www.sensyuengyo.jp/wp-content/uploads/yousuien_10_201807_800_600.png" alt="羊水塩 10袋入" /><span class="lineup-badge">お試し</span></div>
+        <div class="lineup-card-body"><h3>羊水塩 10袋入</h3><p style="font-family:var(--font-serif-jp);font-size:12px;color:rgba(184,147,90,0.6);margin-top:4px;">まずはお試しに</p><p style="color:rgba(244,237,228,0.5);font-size:12px;line-height:2;margin-top:8px;">初めての方におすすめ。まずは5kgから、鯨屋の塩を体験してください。送料700円で全国配送。</p><div class="lineup-card-bottom"><span style="color:rgba(244,237,228,0.5);font-size:12px;">500g &times; 10袋（5kg）</span><span class="lineup-card-price">&yen;5,000</span></div></div>
+      </div>
+    </div>
+    <div class="portable-card fade-in">
+      <div class="portable-icon"><p style="font-family:var(--font-shippori);font-size:14px;color:rgba(244,237,228,0.8);">携帯塩</p><p style="font-family:var(--font-garamond);font-size:9px;color:rgba(244,237,228,0.3);margin-top:4px;">40g</p></div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;"><h3 style="font-family:var(--font-shippori);font-size:18px;font-weight:700;letter-spacing:0.1em;">携帯塩</h3><span style="font-family:var(--font-garamond);font-size:12px;color:rgba(184,147,90,0.5);">— Portable Salt</span></div>
+        <p style="color:rgba(244,237,228,0.5);font-size:12px;line-height:2;margin-bottom:12px;">歯・歯茎マッサージ用。重曹とミネラル塩、ニガリ、ミントを配合。保存料・発泡剤・研磨剤・甘味料は一切不使用。飲み込んでも安全な、口に入れるものへの老舗の矜持。</p>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="color:rgba(244,237,228,0.5);font-size:12px;">40g入り</span><span style="font-family:var(--font-garamond);font-size:20px;">&yen;800</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== Usage ===== -->
+<section class="usage section-pad">
+  <div class="container" style="max-width:960px;">
+    <div class="fade-in">
+      <p class="section-title-en">How to Use</p>
+      <p class="section-title-ja">五つの使い方</p>
+      <div class="gold-line section-title-line"></div>
+    </div>
+    <div class="fade-in" style="text-align:center;margin-bottom:48px;">
+      <p style="color:rgba(244,237,228,0.4);font-size:14px;line-height:2;">調理だけではない。飲む、浸かる、洗う、塗る。<br>鯨屋の塩は、暮らしのすべてに寄り添う。</p>
+    </div>
+    <div class="usage-grid">
+      <div class="usage-card fade-in" onclick="this.classList.toggle('open')"><div class="usage-card-img"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80&auto=format" alt="調理" /><p class="usage-card-catch">素材が、目を覚ます。</p></div><div class="usage-card-body"><h3>調理</h3><p class="en">Cooking</p><div class="usage-detail">おにぎり、天ぷら、焼き魚——素材の持ち味を最大限に引き出すのが天然ミネラル塩の力。化学精製塩では出せない、丸みのある深い味わい。</div></div></div>
+      <div class="usage-card fade-in fade-in-delay-1" onclick="this.classList.toggle('open')"><div class="usage-card-img"><img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&q=80&auto=format" alt="飲用" /><p class="usage-card-catch">一杯の水が、変わる。</p></div><div class="usage-card-body"><h3>飲用</h3><p class="en">Drinking</p><div class="usage-detail">水1Lに10g——それだけで羊水と同じイオン組成に。毎日の水分補給を、ミネラル補給の時間へ。身体の内側から整える、最もシンプルな習慣。</div></div></div>
+      <div class="usage-card fade-in fade-in-delay-2" onclick="this.classList.toggle('open')"><div class="usage-card-img"><img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=400&q=80&auto=format" alt="浴用" /><p class="usage-card-catch">海に還る、ひととき。</p></div><div class="usage-card-body"><h3>浴用</h3><p class="en">Bathing</p><div class="usage-detail">湯船に一掴み。太古の海のミネラルに包まれる贅沢な入浴体験。身体を芯から温め、心までほどく。タラソテラピーの原点がここに。</div></div></div>
+      <div class="usage-card fade-in fade-in-delay-3" onclick="this.classList.toggle('open')"><div class="usage-card-img"><img src="https://images.unsplash.com/photo-1585232004423-244e0e6904e3?w=400&q=80&auto=format" alt="洗浄" /><p class="usage-card-catch">古来の知恵、塩の浄化。</p></div><div class="usage-card-body"><h3>洗浄</h3><p class="en">Cleansing</p><div class="usage-detail">歯磨き、洗顔、うがいに。天然ミネラルと重曹の力で口内を清浄に保つ携帯塩もご用意。保存料・発泡剤・研磨剤・甘味料不使用。</div></div></div>
+      <div class="usage-card fade-in fade-in-delay-4" onclick="this.classList.toggle('open')"><div class="usage-card-img"><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=400&q=80&auto=format" alt="塗布" /><p class="usage-card-catch">肌が、呼吸する。</p></div><div class="usage-card-body"><h3>塗布</h3><p class="en">Body Care</p><div class="usage-detail">マッサージソルトとして全身に。ミネラル豊富な天然塩が肌をやさしく整え、すこやかに保つ。飲み込んでも安全な成分だけで作られています。</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== Testimonials ===== -->
+<section class="testimonials washi-texture section-pad">
+  <div class="container" style="max-width:960px;">
+    <div class="fade-in" style="text-align:center;margin-bottom:48px;">
+      <p class="section-title-en">Voices</p>
+      <h2 style="font-family:var(--font-shippori);font-size:clamp(22px,4vw,30px);font-weight:700;letter-spacing:0.15em;">選び続ける人の、声。</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in"><p class="testimonial-quote">&ldquo;</p><p class="testimonial-text">料理人として三十年、塩は何十種類と試してきた。羊水塩に出会ってからは、これ以外を使う理由がなくなった。素材の味を殺さず、しかし確実に引き上げる。プロが最後にたどり着く塩だと思う。</p><div class="testimonial-author"><p class="name">K. M.</p><p class="role">和食料理人・大阪</p></div></div>
+      <div class="testimonial-card fade-in fade-in-delay-1"><p class="testimonial-quote">&ldquo;</p><p class="testimonial-text">毎朝コップ一杯の水に溶かして飲んでいます。身体が欲しがっていたものは、これだったのかと感じます。家族全員の日常に欠かせないものになりました。もう十年以上のお付き合いです。</p><div class="testimonial-author"><p class="name">S. T.</p><p class="role">愛用歴12年・兵庫県</p></div></div>
+      <div class="testimonial-card fade-in fade-in-delay-2"><p class="testimonial-quote">&ldquo;</p><p class="testimonial-text">入浴に使い始めて肌の調子がとても良い。合成入浴剤では得られない、海に入った後のような心地よさ。贅沢ですが、一度知るともう戻れません。</p><div class="testimonial-author"><p class="name">A. Y.</p><p class="role">愛用歴5年・東京都</p></div></div>
+    </div>
+    <p class="fade-in" style="text-align:center;color:rgba(244,237,228,0.25);font-size:12px;margin-top:32px;">※ 個人の感想であり、効果効能を保証するものではありません。</p>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== Press ===== -->
+<section class="press washi-texture section-pad">
+  <div class="container" style="max-width:960px;">
+    <div class="fade-in">
+      <p class="section-title-en">Featured in</p>
+      <p class="section-title-ja">メディア掲載</p>
+      <div class="gold-line section-title-line"></div>
+    </div>
+    <div class="fade-in" style="text-align:center;margin-bottom:48px;">
+      <p style="color:rgba(244,237,228,0.4);font-size:14px;line-height:2;">本物を知る人が、選んでいる。<br>数々のメディアで取り上げられた、鯨屋の羊水塩。</p>
+    </div>
+    <div class="press-images">
+      <div class="press-card fade-in"><img src="https://www.sensyuengyo.jp/wp-content/uploads/otona_MUSE_w800.png" alt="おとなミューズ 2021年9月号" /><div class="press-card-body"><p style="font-family:var(--font-serif-jp);font-size:14px;letter-spacing:0.1em;color:rgba(244,237,228,0.8);">おとなミューズ</p><p style="font-family:var(--font-garamond);font-size:12px;color:rgba(244,237,228,0.4);margin-top:4px;">2021年9月号 vol.111</p></div></div>
+      <div class="press-card fade-in fade-in-delay-1"><img src="https://www.sensyuengyo.jp/wp-content/uploads/Keisai_103p_w800.png" alt="掲載ページ p.103" /><div class="press-card-body"><p style="font-family:var(--font-serif-jp);font-size:14px;letter-spacing:0.1em;color:rgba(244,237,228,0.8);">おとなミューズ 掲載ページ</p><p style="font-family:var(--font-garamond);font-size:12px;color:rgba(244,237,228,0.4);margin-top:4px;">p.103 Bath Salt として紹介</p></div></div>
+    </div>
+    <div style="border-top:1px solid rgba(184,147,90,0.1);padding-top:32px;">
+      <p class="section-title-en fade-in" style="text-align:center;margin-bottom:24px;">Also Featured in</p>
+      <div class="press-other fade-in">
+        <span>anan <small style="font-size:10px;color:rgba(244,237,228,0.3);display:block;">2109号（2018年）</small></span>
+        <span>美STORY</span>
+        <span>ViVi</span>
+        <span>25ans</span>
+        <span>CREA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== Contact ===== -->
+<section class="contact section-pad">
+  <div class="container" style="max-width:960px;">
+    <div class="fade-in">
+      <p class="section-title-en">Company &amp; Purchase</p>
+      <p class="section-title-ja">会社情報・ご購入</p>
+      <div class="gold-line section-title-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <h3>泉州塩業株式会社</h3>
+        <p style="color:rgba(244,237,228,0.4);font-size:12px;margin-bottom:24px;">鯨屋謹製 — 天文年間より続く泉州唯一の塩屋</p>
+        <div class="spec-row"><span class="spec-label">Address</span><span class="spec-value">〒596-0834<br>大阪府岸和田市天神山町2-9-9</span></div>
+        <div class="gold-line"></div>
+        <div class="spec-row"><span class="spec-label">Tel</span><span class="spec-value"><a href="tel:072-428-3434" style="font-family:var(--font-garamond);letter-spacing:0.1em;">(072) 428-3434</a></span></div>
+        <div class="gold-line"></div>
+        <div class="spec-row"><span class="spec-label">Trade</span><span class="spec-value">屋号: 鯨屋（KUJIRAYA）</span></div>
+        <div class="contact-map" style="margin-top:24px;">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.5!2d135.3756!3d34.4553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000da5f7e7fffff%3A0x0!2z5aSn6Ziq5bqc5bK45ZKM55Sw5biC5aSp56We5bGx55S677yS5LiB55uu77yZ!5e0!3m2!1sja!2sjp!4v1700000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="泉州塩業株式会社 所在地"></iframe>
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-1">
+        <h3 style="font-family:var(--font-shippori);font-size:20px;font-weight:700;letter-spacing:0.1em;margin-bottom:8px;">ご購入について</h3>
+        <p style="color:rgba(244,237,228,0.4);font-size:12px;margin-bottom:24px;">四百九十年の歴史を、ご家庭の食卓へ。</p>
+        <p style="color:rgba(244,237,228,0.6);font-size:14px;line-height:2.2;margin-bottom:24px;">ふるさと納税（さとふる）、お電話、またはお問合わせフォームにて承っております。<br>全国配送対応。</p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <a href="https://www.satofull.jp/" target="_blank" rel="noopener noreferrer" class="cta-link"><div><p style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.25em;color:rgba(184,147,90,0.5);text-transform:uppercase;margin-bottom:4px;">Furusato Tax</p><p style="font-size:14px;color:rgba(244,237,228,0.8);">さとふるで購入</p></div><span class="arrow">&rarr;</span></a>
+          <a href="https://www.sensyuengyo.jp/" target="_blank" rel="noopener noreferrer" class="cta-link"><div><p style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.25em;color:rgba(184,147,90,0.5);text-transform:uppercase;margin-bottom:4px;">Contact &amp; Order</p><p style="font-size:14px;color:rgba(244,237,228,0.8);">お問合わせ・ご注文</p></div><span class="arrow">&rarr;</span></a>
+          <a href="tel:072-428-3434" class="cta-link"><div><p style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.25em;color:rgba(184,147,90,0.5);text-transform:uppercase;margin-bottom:4px;">Telephone</p><p style="font-size:14px;color:rgba(244,237,228,0.8);">お電話でのご注文</p><p style="font-family:var(--font-garamond);font-size:12px;color:rgba(244,237,228,0.4);margin-top:4px;">(072) 428-3434</p></div><span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <svg width="100" height="100" viewBox="0 0 200 200" fill="none" style="margin:0 auto 24px;"><circle cx="100" cy="100" r="95" stroke="#b8935a" stroke-width="1"/><circle cx="100" cy="100" r="88" stroke="#b8935a" stroke-width="0.5"/><text fill="#b8935a" font-family="Cinzel,serif" font-size="9" letter-spacing="0.15em"><textPath href="#uA3" startOffset="50%" text-anchor="middle">SENSYU ENGYO</textPath></text><defs><path id="uA3" d="M 30 100 A 70 70 0 0 1 170 100"/></defs><text fill="#b8935a" font-family="Cinzel,serif" font-size="9" letter-spacing="0.15em"><textPath href="#lA3" startOffset="50%" text-anchor="middle">KUJIRAYA</textPath></text><defs><path id="lA3" d="M 35 115 A 70 70 0 0 0 165 115"/></defs><g transform="translate(100,95)" fill="#b8935a"><path d="M-30 10Q-20 0-10 10Q0 20 10 10Q20 0 30 10" stroke="#b8935a" stroke-width="1.2" fill="none"/><ellipse cx="0" cy="-8" rx="18" ry="8" opacity="0.9"/><path d="M16-10Q24-20 28-14Q26-8 18-6Z"/><circle cx="-8" cy="-10" r="1.5" fill="#0a0a0a"/></g><text x="100" y="160" fill="#b8935a" font-family="Cormorant Garamond,serif" font-size="8" text-anchor="middle" letter-spacing="0.2em" opacity="0.7">SINCE 1532</text></svg>
+  <p style="font-family:var(--font-shippori);font-size:14px;letter-spacing:0.3em;color:rgba(244,237,228,0.6);">泉州塩業株式会社</p>
+  <p style="font-family:var(--font-cinzel);font-size:12px;letter-spacing:0.3em;color:rgba(244,237,228,0.3);margin-top:4px;">SENSYU ENGYO KUJIRAYA</p>
+  <div class="gold-line" style="width:96px;margin:24px auto;"></div>
+  <p style="font-family:var(--font-garamond);font-size:11px;letter-spacing:0.2em;color:rgba(244,237,228,0.2);">&copy; 2026 Sensyu Engyo Co., Ltd. All Rights Reserved.</p>
+</footer>
+
+<!-- ===== Sticky CTA ===== -->
+<div id="sticky-cta">
+  <div class="inner">
+    <div class="cta-info">
+      <p style="font-family:var(--font-shippori);font-size:14px;letter-spacing:0.1em;color:rgba(244,237,228,0.8);">羊水塩 — 鯨屋謹製</p>
+      <p style="font-family:var(--font-garamond);font-size:10px;letter-spacing:0.2em;color:rgba(244,237,228,0.3);">MINERAL-BALANCED SALT SINCE 1532</p>
+    </div>
+    <a href="https://www.sensyuengyo.jp/" target="_blank" rel="noopener noreferrer" class="cta-btn">ご購入・お問合わせ</a>
+  </div>
+</div>
+
+<script>
+// Loading screen
+setTimeout(function(){ document.getElementById('loading').classList.add('hide'); }, 3200);
+setTimeout(function(){ document.getElementById('loading').style.display = 'none'; }, 4000);
+
+// Intersection Observer for fade-in
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Trigger mineral bar animation
+      var bars = entry.target.querySelectorAll('.mineral-bar-fill');
+      bars.forEach(function(bar) { bar.classList.add('visible'); });
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-50px' });
+
+document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+
+// Mineral bars standalone observer
+var barObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.mineral-bar-fill').forEach(function(bar) {
+        bar.classList.add('visible');
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.mineral-card').forEach(function(el) { barObserver.observe(el); });
+
+// CountUp
+var countObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      var target = parseInt(entry.target.dataset.target);
+      var duration = parseInt(entry.target.dataset.duration) || 2000;
+      var suffix = entry.target.dataset.suffix || '';
+      var start = performance.now();
+      function update(now) {
+        var elapsed = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        entry.target.textContent = Math.round(eased * target).toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.count-up').forEach(function(el) { countObserver.observe(el); });
+
+// Sticky CTA bar
+window.addEventListener('scroll', function() {
+  var cta = document.getElementById('sticky-cta');
+  if (window.scrollY > 800) { cta.classList.add('visible'); }
+  else { cta.classList.remove('visible'); }
+});
+
+// Mobile badge alignment
+if (window.innerWidth < 768) {
+  var wrap = document.querySelector('.hero-badge-wrap');
+  if (wrap) wrap.style.flexWrap = 'wrap';
+  var hide = document.querySelector('.hide-mobile');
+  if (hide) hide.style.display = 'none';
+}
+</script>
+</body>
+</html>
